@@ -1,2 +1,2 @@
 # opencti-homelab-demo
-This repository contains demos and configurations for OpenCTI by Filigran
+This repository will contain demos and configurations for OpenCTI by Filigran

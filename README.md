@@ -3,7 +3,7 @@ This repository will contain demos and configurations for OpenCTI by Filigran
 
 # CSIRT DEMO Case
 
-## FICTIONAL CASE - Security Incident - 2024-02-15 - The Silent Surge - FICTIONAL CASE
+## [FICTIONAL CASE](https://github.com/fwuest/opencti-homelab-demo/blob/main/2025-01-13t19_42_11.650z_tlp_all_(exportfilestix2)_case-incident-fictional%20case%20-%20security%20incident%20-%202024-02-15%20-%20the%20silent%20surge%20-%20fictional%20case_full.json) - Security Incident - 2024-02-15 - The Silent Surge - FICTIONAL CASE
 
 The Silent Surge was a targeted cyber espionage campaign against Suefin Data Solutions, a Swiss data analytics company. The attackers, leveraging an Advanced Persistent Threat (APT) approach, initiated the campaign with a sophisticated spear-phishing email aimed at a key employee, Waltor Suefin. This email included a malicious link that, when clicked, installed a Remote Monitoring and Management (RMM) tool, ConnectWise Control (formerly known as ScreenConnect). The RMM tool provided the attackers with a foothold in Suefin's network, enabling stealthy remote access.
 

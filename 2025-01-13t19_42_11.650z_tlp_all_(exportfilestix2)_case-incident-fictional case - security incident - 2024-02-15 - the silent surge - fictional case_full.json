@@ -1,0 +1,2544 @@
+{
+    "type": "bundle",
+    "id": "bundle--bc14f18d-a5e3-452c-99ff-fe674a925380",
+    "objects": [
+        {
+            "id": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "spec_version": "2.1",
+            "identity_class": "individual",
+            "name": "Walter Fusion",
+            "created": "2024-10-19T17:09:46.177Z",
+            "modified": "2024-10-19T17:09:46.177Z",
+            "x_opencti_id": "75dfd07b-9ec1-4afe-a95a-2969cbe6bf14",
+            "x_opencti_type": "Individual",
+            "type": "identity"
+        },
+        {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:RED",
+            "definition": {
+                "tlp": "red"
+            }
+        },
+        {
+            "id": "x-opencti-case-incident--a113d2bb-02a3-5bcc-8843-134561692af6",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 60,
+            "created": "2024-02-15T08:30:00.000Z",
+            "modified": "2024-11-25T07:50:38.897Z",
+            "name": "FICTIONAL CASE - Security Incident - 2024-02-15 - The Silent Surge - FICTIONAL CASE",
+            "description": "The Silent Surge was a targeted cyber espionage campaign against Suefin Data Solutions, a Swiss data analytics company. The attackers, leveraging an Advanced Persistent Threat (APT) approach, initiated the campaign with a sophisticated spear-phishing email aimed at a key employee, Waltor Suefin. This email included a malicious link that, when clicked, installed a Remote Monitoring and Management (RMM) tool, ConnectWise Control (formerly known as ScreenConnect). The RMM tool provided the attackers with a foothold in Suefin's network, enabling stealthy remote access.\n\nUpon establishing initial access, the threat actors deployed a custom-built malicious file designed to escalate privileges and evade detection. The attackers then conducted lateral movement across the network, leveraging stolen credentials and exploiting vulnerabilities. Notably, they targeted Kubernetes environments and Linux systems running Red Hat Enterprise Linux (RHEL).\n\nKey vulnerabilities exploited during the attack included CVE-2022-0847 (Dirty Pipe), CVE-2022-0185, and Kubernetes vulnerabilities such as CVE-2023-2728. The attackers demonstrated a deep understanding of Kubernetes security and used these vulnerabilities to compromise containerized environments and escalate their privileges. Sensitive data, including customer information and intellectual property, was exfiltrated over an extended period.\n\nThe attackers operated with a clear objective of data theft and reconnaissance, leveraging custom scripts to maintain persistence and avoid detection. By February 6th, abnormal network traffic patterns triggered alerts, leading to the identification of the malicious activities.",
+            "severity": "critical",
+            "priority": "P1",
+            "response_types": [
+                "ransomware",
+                "data-leak"
+            ],
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "x_opencti_id": "696cb695-c093-4788-9a8a-96203987b827",
+            "x_opencti_type": "Case-Incident",
+            "type": "x-opencti-case-incident",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "object_refs": [
+                "relationship--34e56dbe-abe0-53ee-a873-897f4b6e6051",
+                "relationship--ec9ee319-8b55-5b2f-a1ae-50a99a334d35",
+                "relationship--d6a31b05-deeb-5273-8e91-4c58f38896dc",
+                "relationship--1d310eda-1bf9-55e7-8358-86b14f61c56a",
+                "relationship--d6fcf965-cf67-543c-97e7-e253ce8a9021",
+                "relationship--e604cb6d-ecd1-5f78-ba67-2e95f445a176",
+                "relationship--aedf61ef-cdce-50bf-80a8-2400477a542d",
+                "relationship--7b10a008-60b3-5ea5-b522-7809beb9f259",
+                "relationship--870f99d7-2875-5eac-88ae-eadea4a11c9b",
+                "relationship--ba3cf2e3-f86d-5480-a14f-c9c1675e53f0",
+                "relationship--669a2d63-1d66-5b86-9132-0917b278136f",
+                "relationship--7db97b4d-1370-5c66-a702-7f518a8e369c",
+                "relationship--6b533f6d-8eb3-519f-b351-d326a6b48958",
+                "relationship--75a61985-0c07-5de2-9044-463b4f00883a",
+                "relationship--cc6d7414-d1f4-59dd-9958-9cc7cb3255b5",
+                "relationship--1eff2903-6977-57f5-8393-80193b952663",
+                "relationship--3f100289-bbc0-5698-aed8-7a30471bfd0e",
+                "relationship--621c17fa-6c7c-5e4b-99a7-a1543a67a5a2",
+                "relationship--3a8bb0e8-43c7-5222-90fb-d08aa2faba23",
+                "relationship--0ca3bd3e-5e33-5eb9-9358-0b37ee512432",
+                "relationship--af14e788-b0ba-5db8-9149-d2bb9431ed49",
+                "relationship--94696dc3-dbae-5db8-84dc-2c7a87c01d2a",
+                "relationship--2c4b65e6-0946-5688-b54d-25261a11c5d3",
+                "relationship--f8200ae0-9b87-535a-8db7-b672490b2739",
+                "relationship--577acff7-5186-56b0-9f95-468a06ee50a3",
+                "relationship--673179f5-6467-5480-860f-adf6739ff617",
+                "relationship--6be3c071-8f72-5d99-b036-593b2fa4d962",
+                "relationship--0a2bbf86-f647-5642-bccc-2c55c7b12878",
+                "relationship--b4422cdb-3b99-5afc-a482-7369ae01b60d",
+                "relationship--13aea67c-954b-5284-85bf-4c6d2591cb8b",
+                "relationship--ed156594-211f-5224-96e8-39f377c4cc8b",
+                "relationship--c2a08e72-c696-51da-8ee5-cdebc75c0f48",
+                "relationship--bf46026c-9728-58cc-a5e4-2e4a72b4b01c",
+                "relationship--1cde8711-e0cd-5b33-9d41-54006a783fbe",
+                "relationship--8786919f-2564-5b12-91d5-4d6a963f14c4",
+                "relationship--c7d18176-e0e2-5ead-ba5e-b1259091ecec",
+                "relationship--bafd88af-4cfb-5243-90c8-9de905cfc189",
+                "relationship--4b55be91-0536-5f6f-baff-dc860083daf2",
+                "relationship--151d97df-51d7-5c1a-af42-2b2cd6be0895",
+                "relationship--5b305b22-e766-5f05-93c3-ecad29947386",
+                "relationship--4bd7fd28-3488-5a0b-a833-fa4fd6b0275e",
+                "relationship--56875b2b-9d78-5d42-a595-4277340515fc",
+                "relationship--44cb1952-3c21-5f9c-b179-ab785abb48dc",
+                "relationship--870cdcb7-1fe1-531b-903d-3bfe3e45f266",
+                "relationship--66461c2c-ea88-5dd1-af85-d7b4a0579b7a",
+                "relationship--2f5782a7-16e1-5079-8ce2-be5b7d8cab24",
+                "relationship--4b5d968a-6a6c-50ab-8a76-649a47e1d042",
+                "relationship--650c04b1-b204-5ada-9abc-323da1d358e2",
+                "relationship--6eed5d19-1ed9-559d-aa26-97d4fd088780",
+                "relationship--9c0c0f23-a421-5f81-a365-38a0d0f0aa15",
+                "relationship--1b622aca-134a-52e0-a7f9-1fb053151de1",
+                "relationship--7c12b0dc-091c-5374-8004-08161b08bf64",
+                "file--5c81ca8d-d26a-5eca-956e-8404d5a323db",
+                "url--e2870f7a-1946-5b53-8139-74cb151cc090",
+                "file--ab7d3e11-a5fc-59c8-a6c7-409c47f13d8b",
+                "file--ccbca1cc-d43d-5eb2-bf51-08b884cd0c86",
+                "ipv4-addr--cb9d70c5-d244-531c-9efb-bcae57adc793",
+                "file--406f632b-3515-53f8-97a3-b4c08625cd21",
+                "domain-name--866542ad-6bda-5569-96f3-aa999050ec05",
+                "email-addr--3febe095-5c48-5767-9784-a15bcd25bcf9",
+                "vulnerability--7478b3ca-8eef-56d2-b3a2-b27ebd9d23df",
+                "identity--46e14508-26bf-5795-a08d-d0654c929c78",
+                "malware--351aefac-ea22-52d6-a379-49ec0c7831d6",
+                "malware--f8c6ed07-26b5-5e59-9dd7-4a06d9b5722f",
+                "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+                "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+                "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5",
+                "tool--5db18f5e-4ca6-5bf4-aecc-5e28007ac934",
+                "vulnerability--328c381f-c00f-51e4-bb39-e61a626c2964",
+                "vulnerability--5e16ee8f-7b49-58e6-8757-13058486cd1a",
+                "identity--2f6ecdec-9fc8-5055-8638-f1372fac5a24",
+                "attack-pattern--1d391f08-536b-5123-9178-5c509ef94ec9",
+                "software--96ea9bba-8ee7-5de0-9b86-4730db8acfaf",
+                "attack-pattern--2aa544df-6e7c-5c5c-b870-b8a6a741f1b6",
+                "software--55e26346-3c86-5c8a-b8bd-7abd47c70ed9",
+                "tool--9fff8fa6-620a-5f97-9a1c-6779b7abb82b",
+                "vulnerability--20c2770b-7005-5923-ba46-f5b7fd4bc8d6",
+                "attack-pattern--53ad4a19-cc4b-5a4d-9ba7-c1a1af4b1751",
+                "attack-pattern--8d8ce1ff-70fb-5ca5-8e15-7ec71477190e",
+                "attack-pattern--5d2a0e29-a53f-5e67-b604-668b3e1daa7a",
+                "attack-pattern--dda9cad8-fd58-5908-9c31-f13e4d1afd0d",
+                "attack-pattern--5a9d0c10-3eab-5b54-9d30-d9ae590d238b",
+                "attack-pattern--f236ced8-1590-510c-800a-47476fd66557",
+                "attack-pattern--e498ecdd-212a-55a0-9bbc-ae2728e40682",
+                "attack-pattern--a7de922a-140f-5f1f-8204-60a83d6f65d9",
+                "vulnerability--efdeafaa-79fd-5596-834d-5e9ac378cf2d",
+                "location--d0e7f9bc-8f87-59f9-9b28-a84c1ef2f80f"
+            ]
+        },
+        {
+            "id": "relationship--34e56dbe-abe0-53ee-a873-897f4b6e6051",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:46:47.149Z",
+            "modified": "2024-11-25T07:50:38.814Z",
+            "x_opencti_id": "95e494e6-76c9-4bef-8332-ac668a873a34",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--5d2a0e29-a53f-5e67-b604-668b3e1daa7a"
+        },
+        {
+            "id": "relationship--ec9ee319-8b55-5b2f-a1ae-50a99a334d35",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "start_time": "2024-02-15T09:00:00.000Z",
+            "stop_time": "2024-02-15T09:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:35:13.349Z",
+            "modified": "2024-11-25T07:50:38.802Z",
+            "x_opencti_id": "3784cb41-f565-4855-ba8b-23551f2dfb44",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "tool--9fff8fa6-620a-5f97-9a1c-6779b7abb82b",
+            "target_ref": "attack-pattern--a7de922a-140f-5f1f-8204-60a83d6f65d9"
+        },
+        {
+            "id": "relationship--d6a31b05-deeb-5273-8e91-4c58f38896dc",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:58:36.581Z",
+            "modified": "2024-11-25T07:50:38.735Z",
+            "x_opencti_id": "c69ec69d-0592-4dd6-be0c-77bceb3425d1",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--dda9cad8-fd58-5908-9c31-f13e4d1afd0d",
+            "target_ref": "file--ab7d3e11-a5fc-59c8-a6c7-409c47f13d8b"
+        },
+        {
+            "id": "relationship--1d310eda-1bf9-55e7-8358-86b14f61c56a",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:03:07.369Z",
+            "modified": "2024-11-25T07:50:38.718Z",
+            "x_opencti_id": "9115b0d1-ecc5-4080-81fb-4156cd3ec778",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "malware--351aefac-ea22-52d6-a379-49ec0c7831d6",
+            "target_ref": "attack-pattern--53ad4a19-cc4b-5a4d-9ba7-c1a1af4b1751"
+        },
+        {
+            "id": "relationship--d6fcf965-cf67-543c-97e7-e253ce8a9021",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:55:48.395Z",
+            "modified": "2024-11-25T07:50:38.690Z",
+            "x_opencti_id": "d183f8d8-a999-4edd-bd57-e622fa1f3c62",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--5a9d0c10-3eab-5b54-9d30-d9ae590d238b",
+            "target_ref": "file--406f632b-3515-53f8-97a3-b4c08625cd21"
+        },
+        {
+            "id": "relationship--e604cb6d-ecd1-5f78-ba67-2e95f445a176",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:55:17.132Z",
+            "modified": "2024-11-25T07:50:38.617Z",
+            "x_opencti_id": "8464ca92-4fae-4926-b2a6-688a14f57cb2",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--5a9d0c10-3eab-5b54-9d30-d9ae590d238b"
+        },
+        {
+            "id": "relationship--aedf61ef-cdce-50bf-80a8-2400477a542d",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:52:07.078Z",
+            "modified": "2024-11-25T07:50:38.592Z",
+            "x_opencti_id": "548925d5-aeb3-48ec-8bf6-194ace7b1933",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--8d8ce1ff-70fb-5ca5-8e15-7ec71477190e",
+            "target_ref": "file--5c81ca8d-d26a-5eca-956e-8404d5a323db"
+        },
+        {
+            "id": "relationship--7b10a008-60b3-5ea5-b522-7809beb9f259",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:46:48.666Z",
+            "modified": "2024-11-25T07:50:38.506Z",
+            "x_opencti_id": "04ac9d33-5f99-42cb-83c7-1abcee7a683b",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--53ad4a19-cc4b-5a4d-9ba7-c1a1af4b1751"
+        },
+        {
+            "id": "relationship--870f99d7-2875-5eac-88ae-eadea4a11c9b",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:21:15.652Z",
+            "modified": "2024-11-25T07:50:38.489Z",
+            "x_opencti_id": "9c57c812-83da-43c8-8760-0ba0b2d6642e",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "attack-pattern--f236ced8-1590-510c-800a-47476fd66557"
+        },
+        {
+            "id": "relationship--ba3cf2e3-f86d-5480-a14f-c9c1675e53f0",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:58:04.092Z",
+            "modified": "2024-11-25T07:50:38.425Z",
+            "x_opencti_id": "5bee73ed-6973-4f94-8b41-956684d4f321",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--dda9cad8-fd58-5908-9c31-f13e4d1afd0d"
+        },
+        {
+            "id": "relationship--669a2d63-1d66-5b86-9132-0917b278136f",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-17T16:30:00.000Z",
+            "stop_time": "2024-02-17T16:30:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:32:47.255Z",
+            "modified": "2024-11-25T07:50:38.382Z",
+            "x_opencti_id": "34ccfbaa-bc46-4557-89e1-0147aa3b0b20",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "vulnerability--7478b3ca-8eef-56d2-b3a2-b27ebd9d23df",
+            "target_ref": "attack-pattern--e498ecdd-212a-55a0-9bbc-ae2728e40682"
+        },
+        {
+            "id": "relationship--7db97b4d-1370-5c66-a702-7f518a8e369c",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:48:13.809Z",
+            "modified": "2024-11-25T07:50:38.360Z",
+            "x_opencti_id": "6ed7ff66-0d91-44bf-88ab-88e9abe740d2",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--a7de922a-140f-5f1f-8204-60a83d6f65d9"
+        },
+        {
+            "id": "relationship--6b533f6d-8eb3-519f-b351-d326a6b48958",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-15T09:00:00.000Z",
+            "stop_time": "2024-02-15T09:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:16:25.107Z",
+            "modified": "2024-11-25T07:50:38.310Z",
+            "x_opencti_id": "4f6b8287-0d97-4886-9ffb-c207884b98e4",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--5d2a0e29-a53f-5e67-b604-668b3e1daa7a",
+            "target_ref": "vulnerability--20c2770b-7005-5923-ba46-f5b7fd4bc8d6"
+        },
+        {
+            "id": "relationship--75a61985-0c07-5de2-9044-463b4f00883a",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-15T10:00:00.000Z",
+            "stop_time": "2024-02-15T10:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:49:42.951Z",
+            "modified": "2024-11-25T07:50:38.240Z",
+            "x_opencti_id": "40b6f844-0ae9-465a-b65b-c5aaf516f9b7",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--53ad4a19-cc4b-5a4d-9ba7-c1a1af4b1751",
+            "target_ref": "vulnerability--efdeafaa-79fd-5596-834d-5e9ac378cf2d"
+        },
+        {
+            "id": "relationship--cc6d7414-d1f4-59dd-9958-9cc7cb3255b5",
+            "spec_version": "2.1",
+            "relationship_type": "targets",
+            "start_time": "2024-02-15T09:25:00.000Z",
+            "stop_time": "2024-02-15T09:25:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:22:52.572Z",
+            "modified": "2024-11-25T07:50:38.216Z",
+            "x_opencti_id": "ae6fa651-b05f-4232-aad0-a506ee9912a1",
+            "x_opencti_type": "targets",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "tool--9fff8fa6-620a-5f97-9a1c-6779b7abb82b",
+            "target_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5"
+        },
+        {
+            "id": "relationship--1eff2903-6977-57f5-8393-80193b952663",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:46:48.829Z",
+            "modified": "2024-11-25T07:50:38.203Z",
+            "x_opencti_id": "ef8e183c-b4f9-4292-ae3a-2d5754cdf316",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--e498ecdd-212a-55a0-9bbc-ae2728e40682"
+        },
+        {
+            "id": "relationship--3f100289-bbc0-5698-aed8-7a30471bfd0e",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:49:30.502Z",
+            "modified": "2024-11-25T07:50:38.082Z",
+            "x_opencti_id": "4d3a3ec8-f882-4d76-959d-0d4e0024493c",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--1d391f08-536b-5123-9178-5c509ef94ec9",
+            "target_ref": "ipv4-addr--cb9d70c5-d244-531c-9efb-bcae57adc793"
+        },
+        {
+            "id": "relationship--621c17fa-6c7c-5e4b-99a7-a1543a67a5a2",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "start_time": "2024-02-15T09:00:00.000Z",
+            "stop_time": "2024-02-15T09:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:20:56.815Z",
+            "modified": "2024-11-25T07:50:38.063Z",
+            "x_opencti_id": "5916b74a-158f-47e1-98fb-7d4d7776079d",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "tool--9fff8fa6-620a-5f97-9a1c-6779b7abb82b"
+        },
+        {
+            "id": "relationship--3a8bb0e8-43c7-5222-90fb-d08aa2faba23",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "start_time": "2024-02-15T10:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:59:49.007Z",
+            "modified": "2024-11-25T07:50:38.041Z",
+            "x_opencti_id": "d5a003f6-42fc-4d72-95d8-06b96e834840",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "malware--351aefac-ea22-52d6-a379-49ec0c7831d6"
+        },
+        {
+            "id": "relationship--0ca3bd3e-5e33-5eb9-9358-0b37ee512432",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "Visited malicious site",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T21:00:34.204Z",
+            "modified": "2024-11-25T07:50:37.964Z",
+            "x_opencti_id": "d3bc24c1-308e-4594-81a8-265944d88d39",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "url--e2870f7a-1946-5b53-8139-74cb151cc090",
+            "target_ref": "email-addr--3febe095-5c48-5767-9784-a15bcd25bcf9"
+        },
+        {
+            "id": "relationship--af14e788-b0ba-5db8-9149-d2bb9431ed49",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:51:30.864Z",
+            "modified": "2024-11-25T07:50:37.960Z",
+            "x_opencti_id": "a99d1143-2699-472a-9d69-b90c468c4f79",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "tool--5db18f5e-4ca6-5bf4-aecc-5e28007ac934",
+            "target_ref": "attack-pattern--8d8ce1ff-70fb-5ca5-8e15-7ec71477190e"
+        },
+        {
+            "id": "relationship--94696dc3-dbae-5db8-84dc-2c7a87c01d2a",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:48:06.491Z",
+            "modified": "2024-11-25T07:50:37.850Z",
+            "x_opencti_id": "d3bbfe97-10db-497f-8005-cd4535749919",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--1d391f08-536b-5123-9178-5c509ef94ec9"
+        },
+        {
+            "id": "relationship--2c4b65e6-0946-5688-b54d-25261a11c5d3",
+            "spec_version": "2.1",
+            "relationship_type": "belongs-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:37:05.410Z",
+            "modified": "2024-11-25T07:50:37.785Z",
+            "x_opencti_id": "3d1bff91-6060-489a-876b-62d0a5a282c0",
+            "x_opencti_type": "belongs-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "domain-name--866542ad-6bda-5569-96f3-aa999050ec05",
+            "target_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5"
+        },
+        {
+            "id": "relationship--f8200ae0-9b87-535a-8db7-b672490b2739",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:36:39.009Z",
+            "modified": "2024-11-25T07:50:37.730Z",
+            "x_opencti_id": "53e52057-6d25-422f-bb53-984379fe0a94",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "identity--46e14508-26bf-5795-a08d-d0654c929c78",
+            "target_ref": "email-addr--3febe095-5c48-5767-9784-a15bcd25bcf9"
+        },
+        {
+            "id": "relationship--577acff7-5186-56b0-9f95-468a06ee50a3",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "start_time": "2024-02-18T18:30:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:00:59.828Z",
+            "modified": "2024-11-25T07:50:37.712Z",
+            "x_opencti_id": "2d1d5353-74f9-4023-b347-2aae0b1820ae",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "malware--f8c6ed07-26b5-5e59-9dd7-4a06d9b5722f"
+        },
+        {
+            "id": "relationship--673179f5-6467-5480-860f-adf6739ff617",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:49:17.975Z",
+            "modified": "2024-11-25T07:50:37.651Z",
+            "x_opencti_id": "a3095597-daad-485a-b63b-6c65e88de4d1",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--1d391f08-536b-5123-9178-5c509ef94ec9",
+            "target_ref": "file--ccbca1cc-d43d-5eb2-bf51-08b884cd0c86"
+        },
+        {
+            "id": "relationship--6be3c071-8f72-5d99-b036-593b2fa4d962",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-18T06:30:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:20:50.063Z",
+            "modified": "2024-11-25T07:50:37.615Z",
+            "x_opencti_id": "051b44a4-c8d1-4b08-98df-e1180753c964",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "tool--5db18f5e-4ca6-5bf4-aecc-5e28007ac934",
+            "target_ref": "attack-pattern--f236ced8-1590-510c-800a-47476fd66557"
+        },
+        {
+            "id": "relationship--0a2bbf86-f647-5642-bccc-2c55c7b12878",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-17T16:30:00.000Z",
+            "stop_time": "2024-02-17T16:30:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:31:24.060Z",
+            "modified": "2024-11-25T07:50:37.529Z",
+            "x_opencti_id": "ea738c78-f45e-4350-91f6-93a6dc8cc082",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "vulnerability--7478b3ca-8eef-56d2-b3a2-b27ebd9d23df"
+        },
+        {
+            "id": "relationship--b4422cdb-3b99-5afc-a482-7369ae01b60d",
+            "spec_version": "2.1",
+            "relationship_type": "located-at",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:49:08.052Z",
+            "modified": "2024-11-25T07:50:37.493Z",
+            "x_opencti_id": "515418bb-c82f-4dc0-8b3f-73d9a4f942fd",
+            "x_opencti_type": "located-at",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5",
+            "target_ref": "location--d0e7f9bc-8f87-59f9-9b28-a84c1ef2f80f"
+        },
+        {
+            "id": "relationship--13aea67c-954b-5284-85bf-4c6d2591cb8b",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:55:41.824Z",
+            "modified": "2024-11-25T07:50:37.401Z",
+            "x_opencti_id": "ac61c3e3-14a3-4d99-a48f-95e614baa0a6",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "vulnerability--5e16ee8f-7b49-58e6-8757-13058486cd1a",
+            "target_ref": "attack-pattern--e498ecdd-212a-55a0-9bbc-ae2728e40682"
+        },
+        {
+            "id": "relationship--ed156594-211f-5224-96e8-39f377c4cc8b",
+            "spec_version": "2.1",
+            "relationship_type": "targets",
+            "start_time": "2024-02-15T09:25:00.000Z",
+            "stop_time": "2024-02-15T09:25:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:36:25.121Z",
+            "modified": "2024-11-25T07:50:37.394Z",
+            "x_opencti_id": "b743f461-04ed-4904-b538-93229180c4a1",
+            "x_opencti_type": "targets",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "identity--46e14508-26bf-5795-a08d-d0654c929c78"
+        },
+        {
+            "id": "relationship--c2a08e72-c696-51da-8ee5-cdebc75c0f48",
+            "spec_version": "2.1",
+            "relationship_type": "targets",
+            "description": "Unidentified APT Group targeted Suefin Data Solutions",
+            "start_time": "2024-02-15T08:30:00.000Z",
+            "stop_time": "2024-02-15T09:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T17:45:36.803Z",
+            "modified": "2024-11-25T07:50:37.295Z",
+            "x_opencti_id": "8ec3e8f0-6306-4ed7-bc27-b87d2b086b79",
+            "x_opencti_type": "targets",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5"
+        },
+        {
+            "id": "relationship--bf46026c-9728-58cc-a5e4-2e4a72b4b01c",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-15T10:00:00.000Z",
+            "stop_time": "2024-02-15T10:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:18:06.717Z",
+            "modified": "2024-11-25T07:50:37.289Z",
+            "x_opencti_id": "3e5f2001-c29e-419b-a0b3-e203cee7ad92",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "vulnerability--20c2770b-7005-5923-ba46-f5b7fd4bc8d6"
+        },
+        {
+            "id": "relationship--1cde8711-e0cd-5b33-9d41-54006a783fbe",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:46:16.450Z",
+            "modified": "2024-11-25T07:50:37.235Z",
+            "x_opencti_id": "b9aac66c-0d7e-41e9-929f-6855c9c66e6b",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "vulnerability--328c381f-c00f-51e4-bb39-e61a626c2964",
+            "target_ref": "attack-pattern--e498ecdd-212a-55a0-9bbc-ae2728e40682"
+        },
+        {
+            "id": "relationship--8786919f-2564-5b12-91d5-4d6a963f14c4",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:46:47.480Z",
+            "modified": "2024-11-25T07:50:37.175Z",
+            "x_opencti_id": "ffa7f0f2-d276-4d6b-a6f0-465e9b61dc08",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "attack-pattern--2aa544df-6e7c-5c5c-b870-b8a6a741f1b6"
+        },
+        {
+            "id": "relationship--c7d18176-e0e2-5ead-ba5e-b1259091ecec",
+            "spec_version": "2.1",
+            "relationship_type": "targets",
+            "start_time": "2024-02-15T09:25:00.000Z",
+            "stop_time": "2024-02-15T09:25:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:37:40.319Z",
+            "modified": "2024-11-25T07:50:37.125Z",
+            "x_opencti_id": "976d4684-17a9-4cc3-ae5c-fb93f8a436a3",
+            "x_opencti_type": "targets",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5"
+        },
+        {
+            "id": "relationship--bafd88af-4cfb-5243-90c8-9de905cfc189",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "start_time": "2024-02-15T10:00:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:48:54.372Z",
+            "modified": "2024-11-25T07:50:37.042Z",
+            "x_opencti_id": "a33aa4ab-2450-418f-9131-22bdd98d6c27",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "vulnerability--efdeafaa-79fd-5596-834d-5e9ac378cf2d"
+        },
+        {
+            "id": "relationship--4b55be91-0536-5f6f-baff-dc860083daf2",
+            "spec_version": "2.1",
+            "relationship_type": "targets",
+            "description": "Unidentified APT Group targeted Waltor Suefin",
+            "start_time": "2024-02-15T08:30:00.000Z",
+            "stop_time": "2024-02-15T08:45:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:14:11.309Z",
+            "modified": "2024-11-25T07:50:37.011Z",
+            "x_opencti_id": "861f326e-0391-49a9-a64d-aa4fa9a5d476",
+            "x_opencti_type": "targets",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "identity--46e14508-26bf-5795-a08d-d0654c929c78"
+        },
+        {
+            "id": "relationship--151d97df-51d7-5c1a-af42-2b2cd6be0895",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:44:01.564Z",
+            "modified": "2024-11-25T07:50:36.910Z",
+            "x_opencti_id": "248c8828-1ce6-4486-ba9a-2d6787a7eaa1",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--2aa544df-6e7c-5c5c-b870-b8a6a741f1b6",
+            "target_ref": "email-addr--3febe095-5c48-5767-9784-a15bcd25bcf9"
+        },
+        {
+            "id": "relationship--5b305b22-e766-5f05-93c3-ecad29947386",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "Suefin Data Solutions uses RHEL and Kubernetes in their production environment",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:07:47.730Z",
+            "modified": "2024-11-25T07:50:36.904Z",
+            "x_opencti_id": "3ab77f1f-18e1-47fb-9d99-757b1edc4d3a",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "software--96ea9bba-8ee7-5de0-9b86-4730db8acfaf",
+            "target_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5"
+        },
+        {
+            "id": "relationship--4bd7fd28-3488-5a0b-a833-fa4fd6b0275e",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:56:25.628Z",
+            "modified": "2024-11-25T07:50:36.787Z",
+            "x_opencti_id": "362649aa-c602-4f5b-b8e6-7643a870022d",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "vulnerability--5e16ee8f-7b49-58e6-8757-13058486cd1a",
+            "target_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6"
+        },
+        {
+            "id": "relationship--56875b2b-9d78-5d42-a595-4277340515fc",
+            "spec_version": "2.1",
+            "relationship_type": "targets",
+            "start_time": "2024-02-15T08:30:00.000Z",
+            "stop_time": "2024-02-15T08:30:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:25:00.427Z",
+            "modified": "2024-11-25T07:50:36.693Z",
+            "x_opencti_id": "843211a6-05ba-438b-80b9-35cad5cdfc59",
+            "x_opencti_type": "targets",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "attack-pattern--2aa544df-6e7c-5c5c-b870-b8a6a741f1b6",
+            "target_ref": "identity--46e14508-26bf-5795-a08d-d0654c929c78"
+        },
+        {
+            "id": "relationship--44cb1952-3c21-5f9c-b179-ab785abb48dc",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "start_time": "2024-02-15T08:30:00.000Z",
+            "stop_time": "2024-02-15T08:30:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T18:24:08.892Z",
+            "modified": "2024-11-25T07:50:36.611Z",
+            "x_opencti_id": "5a197914-8224-4911-bbe2-736029cbe4f9",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "attack-pattern--2aa544df-6e7c-5c5c-b870-b8a6a741f1b6"
+        },
+        {
+            "id": "relationship--870cdcb7-1fe1-531b-903d-3bfe3e45f266",
+            "spec_version": "2.1",
+            "relationship_type": "uses",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:19:40.995Z",
+            "modified": "2024-11-25T07:50:36.582Z",
+            "x_opencti_id": "39254802-9cfb-4ae6-be67-6ab0b6407c68",
+            "x_opencti_type": "uses",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "tool--5db18f5e-4ca6-5bf4-aecc-5e28007ac934"
+        },
+        {
+            "id": "relationship--66461c2c-ea88-5dd1-af85-d7b4a0579b7a",
+            "spec_version": "2.1",
+            "relationship_type": "part-of",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:52:15.158Z",
+            "modified": "2024-11-25T07:50:36.500Z",
+            "x_opencti_id": "a9a81043-3abf-4b16-9404-b89c0f5e3efd",
+            "x_opencti_type": "part-of",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5",
+            "target_ref": "identity--2f6ecdec-9fc8-5055-8638-f1372fac5a24"
+        },
+        {
+            "id": "relationship--2f5782a7-16e1-5079-8ce2-be5b7d8cab24",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "The Silent Surge targets RHEL and Kubernetes",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:06:56.239Z",
+            "modified": "2024-11-25T07:50:36.482Z",
+            "x_opencti_id": "96cd5f67-ca8d-4b77-8734-8a2636259ec8",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "software--96ea9bba-8ee7-5de0-9b86-4730db8acfaf"
+        },
+        {
+            "id": "relationship--4b5d968a-6a6c-50ab-8a76-649a47e1d042",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T19:46:00.855Z",
+            "modified": "2024-11-25T07:50:36.402Z",
+            "x_opencti_id": "9009cf1d-743c-4938-ad7c-1ed9aee58f01",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "vulnerability--328c381f-c00f-51e4-bb39-e61a626c2964",
+            "target_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6"
+        },
+        {
+            "id": "relationship--650c04b1-b204-5ada-9abc-323da1d358e2",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "Cryptocurrency mining container was installed on the production Kubernetes of Suefin Data Solutions.",
+            "start_time": "2024-02-18T03:45:00.000Z",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:09:26.409Z",
+            "modified": "2024-11-25T07:50:36.386Z",
+            "x_opencti_id": "9f78abbd-8020-49a6-a3df-557a2ce3c79d",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "malware--f8c6ed07-26b5-5e59-9dd7-4a06d9b5722f",
+            "target_ref": "software--96ea9bba-8ee7-5de0-9b86-4730db8acfaf"
+        },
+        {
+            "id": "relationship--6eed5d19-1ed9-559d-aa26-97d4fd088780",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "Unidentified APT Group compromises Kubernetes and RHEL",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:06:01.319Z",
+            "modified": "2024-11-25T07:50:36.277Z",
+            "x_opencti_id": "9ce2b55e-039b-4b82-88e1-9a12541b1399",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "software--96ea9bba-8ee7-5de0-9b86-4730db8acfaf"
+        },
+        {
+            "id": "relationship--9c0c0f23-a421-5f81-a365-38a0d0f0aa15",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "Suefin Data Solutions uses RHEL and Kubernetes in their production environment",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:07:47.440Z",
+            "modified": "2024-11-25T07:50:36.270Z",
+            "x_opencti_id": "5e21a613-1750-4bda-a747-44e38d80617c",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "software--55e26346-3c86-5c8a-b8bd-7abd47c70ed9",
+            "target_ref": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5"
+        },
+        {
+            "id": "relationship--1b622aca-134a-52e0-a7f9-1fb053151de1",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "Unidentified APT Group compromises Kubernetes and RHEL",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:05:59.882Z",
+            "modified": "2024-11-25T07:50:36.114Z",
+            "x_opencti_id": "ef7558b0-ad0c-4abf-b963-1884af9196d6",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "target_ref": "software--55e26346-3c86-5c8a-b8bd-7abd47c70ed9"
+        },
+        {
+            "id": "relationship--7c12b0dc-091c-5374-8004-08161b08bf64",
+            "spec_version": "2.1",
+            "relationship_type": "related-to",
+            "description": "The Silent Surge targets RHEL and Kubernetes",
+            "revoked": false,
+            "confidence": 60,
+            "lang": "en",
+            "created": "2024-10-20T20:06:55.269Z",
+            "modified": "2024-11-25T07:50:36.007Z",
+            "x_opencti_id": "ce752c13-3270-4ec5-a6f1-79feb5335547",
+            "x_opencti_type": "related-to",
+            "type": "relationship",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ],
+            "source_ref": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "target_ref": "software--55e26346-3c86-5c8a-b8bd-7abd47c70ed9"
+        },
+        {
+            "id": "file--5c81ca8d-d26a-5eca-956e-8404d5a323db",
+            "spec_version": "2.1",
+            "x_opencti_description": "Malicious container image used in the Kubernetes compromise",
+            "x_opencti_score": 50,
+            "name": "malicious_container_image.tar",
+            "x_opencti_id": "4608fa63-bdb2-44ef-a246-c32513630866",
+            "x_opencti_type": "StixFile",
+            "type": "file",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "url--e2870f7a-1946-5b53-8139-74cb151cc090",
+            "spec_version": "2.1",
+            "x_opencti_description": "Phishing URL used in the initial spear-phishing campaign",
+            "x_opencti_score": 50,
+            "value": "http://malicious-site.example.com/phish",
+            "x_opencti_id": "7ce7714c-e1e3-47d3-8e24-0f138a56e919",
+            "x_opencti_type": "Url",
+            "type": "url",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "file--ab7d3e11-a5fc-59c8-a6c7-409c47f13d8b",
+            "spec_version": "2.1",
+            "x_opencti_description": "Cryptocurrency mining container used for distraction",
+            "x_opencti_score": 50,
+            "name": "miner_container.tar.gz",
+            "x_opencti_id": "19e1512b-8487-4556-82b3-5f19d539aaeb",
+            "x_opencti_type": "StixFile",
+            "type": "file",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "file--ccbca1cc-d43d-5eb2-bf51-08b884cd0c86",
+            "spec_version": "2.1",
+            "x_opencti_description": "Custom backdoor deployed for lateral movement",
+            "x_opencti_score": 50,
+            "name": "backdoor_executable.exe",
+            "x_opencti_id": "be84eff9-c5e7-4d62-ab7b-41ba18112a9c",
+            "x_opencti_type": "StixFile",
+            "type": "file",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "ipv4-addr--cb9d70c5-d244-531c-9efb-bcae57adc793",
+            "spec_version": "2.1",
+            "x_opencti_description": "IP address associated with command-and-control server",
+            "x_opencti_score": 50,
+            "value": "203.0.113.45",
+            "x_opencti_id": "ba3f67b9-b93d-4364-aaa2-fccee02fa108",
+            "x_opencti_type": "IPv4-Addr",
+            "type": "ipv4-addr",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "file--406f632b-3515-53f8-97a3-b4c08625cd21",
+            "spec_version": "2.1",
+            "x_opencti_description": "Malicious PowerShell script used for persistence",
+            "x_opencti_score": 50,
+            "name": "malicious_script.ps1",
+            "x_opencti_id": "ea53b43f-ab3c-4710-8b8d-65da1a080fd0",
+            "x_opencti_type": "StixFile",
+            "type": "file",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "domain-name--866542ad-6bda-5569-96f3-aa999050ec05",
+            "spec_version": "2.1",
+            "x_opencti_description": "Domain associated with the target company",
+            "x_opencti_score": 50,
+            "value": "suefindatasolutions.ch",
+            "x_opencti_id": "26a88364-2ccb-4f3c-b8c2-c982155b41e0",
+            "x_opencti_type": "Domain-Name",
+            "type": "domain-name",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "email-addr--3febe095-5c48-5767-9784-a15bcd25bcf9",
+            "spec_version": "2.1",
+            "x_opencti_description": "Targeted email address used in spear-phishing",
+            "x_opencti_score": 50,
+            "value": "waltor.suefin@suefindatasolutions.ch",
+            "x_opencti_id": "8f81a3c7-3e28-4b4a-af03-2de47b8bb12c",
+            "x_opencti_type": "Email-Addr",
+            "type": "email-addr",
+            "x_opencti_created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "x_opencti_labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "vulnerability--7478b3ca-8eef-56d2-b3a2-b27ebd9d23df",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2024-10-20T19:26:38.775Z",
+            "modified": "2024-11-25T07:50:33.648Z",
+            "name": "CVE-2023-2728",
+            "description": "Users may be able to launch containers that bypass the mountable secrets policy enforced by the ServiceAccount admission plugin when using ephemeral containers. The policy ensures pods running with a service account may only reference secrets specified in the service account\u2019s secrets field. Kubernetes clusters are only affected if the ServiceAccount admission plugin and the `kubernetes.io/enforce-mountable-secrets` annotation are used together with ephemeral containers.",
+            "x_opencti_cvss_base_score": 6.5,
+            "x_opencti_cvss_base_severity": "MEDIUM",
+            "x_opencti_cvss_attack_vector": "NETWORK",
+            "x_opencti_cvss_integrity_impact": "HIGH",
+            "x_opencti_cvss_availability_impact": "NONE",
+            "x_opencti_cvss_confidentiality_impact": "HIGH",
+            "x_opencti_cisa_kev": false,
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "external_references": [
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "http://www.openwall.com/lists/oss-security/2023/07/06/3"
+                },
+                {
+                    "source_name": "NIST NVD",
+                    "description": "Users may be able to launch containers that bypass the mountable secrets policy enforced by the ServiceAccount admission plugin when using ephemeral containers. The policy ensures pods running with a service account may only reference secrets specified in the service account\u2019s secrets field. Kubernetes clusters are only affected if the ServiceAccount admission plugin and the `kubernetes.io/enforce-mountable-secrets` annotation are used together with ephemeral containers.",
+                    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-2728"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://security.netapp.com/advisory/ntap-20230803-0004/"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://groups.google.com/g/kubernetes-security-announce/c/vPWYJ_L84m8"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://github.com/kubernetes/kubernetes/issues/118640"
+                }
+            ],
+            "x_opencti_id": "7c0263b8-c59d-4434-b758-57c9571c338f",
+            "x_opencti_type": "Vulnerability",
+            "type": "vulnerability",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "identity--46e14508-26bf-5795-a08d-d0654c929c78",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 40,
+            "created": "2024-10-20T18:11:55.924Z",
+            "modified": "2024-11-25T07:50:33.498Z",
+            "identity_class": "individual",
+            "name": "Waltor Suefin",
+            "description": "Waltor Suefin is a senior IT specialist at Suefin Data Solutions, a data analytics company based in Switzerland. As a key technical employee, Waltor holds significant responsibilities in managing the company's IT infrastructure, including server administration, network security, and cloud services integration. His role gives him access to critical systems and sensitive data, making him a valuable target for adversaries seeking to infiltrate the organization.\n\nDuring the \"Silent Surge\" campaign, an unidentified Advanced Persistent Threat (APT) group targeted Waltor in a sophisticated spear-phishing attack. The attackers sent a well-crafted phishing email to Waltor's corporate email address, waltor.suefin@suefindatasolutions.ch, containing a malicious link that led to the installation of the Remote Monitoring and Management (RMM) tool, ConnectWise Control. This allowed the threat actors to gain initial access to Suefin Data Solutions' network and establish a foothold for further exploitation.\n\nRole and Access Level:\n\nPosition: Senior IT Specialist\nResponsibilities: IT infrastructure management, network security, cloud services integration, server administration.\nAccess Level: High \u2013 Access to critical systems, including servers, Kubernetes clusters, and cloud storage.\nDetails of Compromise:\n\nAttack Vector: Spear-phishing email containing a malicious link.\nEmail Address Targeted: waltor.suefin@suefindatasolutions.ch\nOutcome: Successful compromise leading to initial access and subsequent exploitation of the company's infrastructure.\nRelevance to the Campaign: Waltor's role and access to the organization's internal systems made him an ideal target for the attackers. By compromising his account, the adversaries were able to establish persistence in the network and leverage his permissions to move laterally, escalate privileges, and ultimately gain access to cloud-native environments, including Kubernetes clusters. This facilitated the attackers' objectives of data exfiltration and cloud infrastructure compromise.\n\nImpact of Compromise: The compromise of Waltor Suefin's account was a critical entry point for the APT group, allowing them to execute a multi-stage attack that affected several key systems and led to the exfiltration of sensitive data. His access to cloud services and administrative tools significantly accelerated the attackers' ability to compromise additional resources.\n\nLessons Learned: The targeting of Waltor Suefin highlights the need for:\n\nEnhanced Phishing Protection: Advanced anti-phishing measures to detect and block targeted spear-phishing attempts.\nUser Training: Regular cybersecurity training for employees, especially those with elevated access, to recognize and report phishing attempts.\nAccess Control Measures: Implementing least privilege access principles and monitoring for unusual activity from high-privileged accounts.",
+            "x_opencti_reliability": "F - Reliability cannot be judged",
+            "contact_information": "waltor.suefin@suefindatasolutions.ch",
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "x_opencti_id": "9b7c62fa-e922-4289-9021-3c2d7ca5d223",
+            "x_opencti_type": "Individual",
+            "type": "identity",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "malware--351aefac-ea22-52d6-a379-49ec0c7831d6",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 40,
+            "created": "2024-10-20T18:53:18.881Z",
+            "modified": "2024-11-25T07:50:33.435Z",
+            "name": "Custom Backdoor",
+            "description": "The Custom Backdoor used in the \"Silent Surge\" campaign was a tailored malicious program designed to establish persistent remote access within Suefin Data Solutions' network. Once installed, it allowed the attackers to execute commands, move laterally, and escalate privileges across the compromised systems. The malware was capable of evading detection through obfuscation techniques and communicated with the command-and-control (C2) server using encrypted channels, enabling the attackers to maintain control while avoiding security monitoring.",
+            "malware_types": [
+                "backdoor"
+            ],
+            "is_family": false,
+            "first_seen": "2024-02-15T10:00:00.000Z",
+            "last_seen": "2024-02-18T06:30:00.000Z",
+            "architecture_execution_envs": [
+                "x86-64"
+            ],
+            "capabilities": [
+                "accesses-remote-machines",
+                "escalates-privileges",
+                "exfiltrates-data",
+                "infects-remote-machines"
+            ],
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "lateral-movement",
+                    "x_opencti_order": 0
+                }
+            ],
+            "x_opencti_id": "cbbc99b7-fabc-4169-9269-f37f0904ecd2",
+            "x_opencti_type": "Malware",
+            "type": "malware",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "malware--f8c6ed07-26b5-5e59-9dd7-4a06d9b5722f",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2024-10-20T18:59:52.170Z",
+            "modified": "2024-11-25T07:50:33.420Z",
+            "name": "Cryptocurrency Mining Container",
+            "description": "The Cryptocurrency Mining Container was a malicious Docker container deployed by the attackers to generate cryptocurrency using the compromised Kubernetes environment's resources. It was used as a distraction tactic to create network noise and high CPU usage, diverting the attention of incident responders away from the main objectives of the attack, which included data exfiltration and system compromise. This tactic helped delay detection while the attackers continued their operations.",
+            "malware_types": [
+                "resource-exploitation"
+            ],
+            "is_family": false,
+            "architecture_execution_envs": [
+                "x86-64"
+            ],
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "defense-evasion",
+                    "x_opencti_order": 0
+                }
+            ],
+            "x_opencti_id": "aa32c2df-8ad1-49e7-a0f4-5704835fd810",
+            "x_opencti_type": "Malware",
+            "type": "malware",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "campaign--34446248-b9ce-51b5-9cf7-926ec19983d6",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 40,
+            "created": "2024-10-20T18:02:05.042Z",
+            "modified": "2024-11-25T07:50:33.386Z",
+            "name": "The Silent Surge",
+            "description": "\"The Silent Surge\" is a sophisticated cyber espionage campaign targeting Suefin Data Solutions, a data analytics company based in Switzerland. The campaign began on February 15, 2024, when an unidentified Advanced Persistent Threat (APT) group launched a spear-phishing attack aimed at compromising the email account of a senior IT specialist, Waltor Suefin. The phishing email contained a malicious link that, when clicked, installed the Remote Monitoring and Management (RMM) tool ConnectWise Control, allowing the threat actor to gain initial access and establish persistence within the company's network.\n\nAfter gaining access, the attackers leveraged multiple techniques to move laterally and escalate privileges. They exploited several vulnerabilities, including CVE-2022-0847 (Dirty Pipe) and CVE-2022-0185, to bypass security controls on Red Hat Enterprise Linux (RHEL) systems. The campaign also targeted the company\u2019s Kubernetes infrastructure, exploiting Kubernetes-specific vulnerabilities such as CVE-2023-2728 to achieve cluster-wide control.\n\nThe threat actor demonstrated a deep understanding of cloud-native environments, using cloud tools like kubectl for reconnaissance and data exfiltration. To evade detection and mislead incident responders, the group deployed a cryptocurrency mining container as a distraction while extracting several terabytes of sensitive data, including customer information and proprietary algorithms, over an encrypted outbound channel.\n\nKey Objectives:\n\nGain persistent access to the target network.\nExfiltrate sensitive data and intellectual property.\nCompromise cloud-native infrastructure, including Kubernetes clusters.\nUtilize distraction techniques to hinder incident response efforts.\nNotable Techniques and Tactics:\n\nInitial Access: Spear-phishing with a malicious link that deployed ConnectWise Control.\nExecution: Installation of RMM software to enable remote access and persistence.\nPrivilege Escalation: Exploitation of CVE-2022-0847 and CVE-2022-0185 on RHEL systems.\nLateral Movement: Use of custom malware and container breakout exploits to move across systems.\nKubernetes Compromise: Exploitation of CVE-2023-2728 and other vulnerabilities for container orchestration takeover.\nData Exfiltration: Leveraging cloud-native tools such as kubectl for data extraction.\nDefense Evasion: Deployment of a cryptocurrency mining container to create noise and distract responders.\nImpact:\nThe campaign resulted in the exfiltration of several terabytes of sensitive data, including customer data and proprietary analytics algorithms, leading to significant potential reputational and financial damage to Suefin Data Solutions. The deployment of the cryptocurrency miner caused high CPU usage and network traffic anomalies, complicating detection and response efforts. The threat actors covered their tracks effectively, leaving few forensic traces and withdrawing once their objectives were achieved.\n\nAssociated Intrusion Set: Unidentified APT Group\n\nTargeted Industry: Data Analytics\n\nTargeted Geography: Switzerland\n\nIndicators of Compromise (IoCs):\n\nEmail Address: waltor.suefin@suefindatasolutions.ch\nDomain: suefindatasolutions.ch\nMalicious Files: malicious_script.ps1, backdoor_executable.exe, miner_container.tar.gz\nIP Address: 203.0.113.45 (Command-and-Control server)\nURLs: http://malicious-site.example.com/phish, https://c2.example.com\n\"The Silent Surge\" serves as a case study of how a seemingly small initial compromise through phishing can escalate into a full-scale cloud infrastructure attack, emphasizing the importance of securing cloud-native environments and implementing robust detection and response strategies.",
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "x_opencti_id": "90a295b8-7cbf-4882-9bf3-e163f198e4e7",
+            "x_opencti_type": "Campaign",
+            "type": "campaign",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "id": "intrusion-set--2a01ef72-d250-5a34-a143-d6500991cfba",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 40,
+            "created": "2024-10-20T17:42:35.077Z",
+            "modified": "2024-11-25T07:50:33.355Z",
+            "name": "Unidentified APT Group",
+            "description": "The Unidentified APT Group involved in the \"Silent Surge\" campaign is characterized by its advanced tactics, techniques, and procedures (TTPs), which exhibit traits commonly associated with well-resourced and persistent adversaries. The group targeted Suefin Data Solutions, a Swiss data analytics company, using a sophisticated spear-phishing campaign to compromise a senior IT specialist, Waltor Suefin. The attackers leveraged the Remote Monitoring and Management (RMM) tool ConnectWise Control to establish initial access and maintain persistence within the target's network.\n\nThe group demonstrated a deep understanding of Linux and Kubernetes security, exploiting multiple vulnerabilities such as CVE-2022-0847 (Dirty Pipe) and CVE-2022-0185 to achieve privilege escalation and lateral movement across compromised systems. The attackers targeted cloud-native infrastructure, including Kubernetes clusters running on Red Hat Enterprise Linux (RHEL), and exploited Kubernetes-specific vulnerabilities like CVE-2023-2728 to escalate privileges within containerized environments.\n\nThe group employed a multi-stage approach, using custom malware, backdoors, and obfuscation techniques to evade detection. Additionally, they deployed a cryptocurrency mining container as a distraction tactic to generate noise and mislead incident responders, while the actual goal was data exfiltration. Despite their sophisticated tactics, the true identity and attribution of this group remain unknown, indicating a possible emerging or less-documented APT actor.\n\nAssociated Campaigns: The Silent Surge\n\nMotivations: Data exfiltration, cloud infrastructure compromise, and potentially financial gain (e.g., through cryptocurrency mining as a diversion).\n\nObserved Tactics and Techniques:\n\nInitial Access: Spear-phishing with a malicious link targeting specific employees.\nExecution and Persistence: Use of ConnectWise Control for remote access.\nPrivilege Escalation: Exploitation of CVE-2022-0847 and CVE-2022-0185.\nLateral Movement: Custom backdoor deployment and container breakout exploits.\nData Exfiltration: Use of kubectl and other cloud-native tools to extract sensitive data.\nDefense Evasion: Deployment of cryptocurrency mining activity to distract defenders.\nExploitation of Vulnerabilities: Targeting Kubernetes-specific vulnerabilities such as CVE-2023-2728.\nThe Unidentified APT Group's activities in this campaign suggest a strategic focus on cloud environments and emerging technologies, highlighting the evolving threat landscape for organizations adopting cloud-native infrastructure.",
+            "labels": [
+                "demo",
+                "demo-csirt-case"
+            ],
+            "x_opencti_id": "6f682fa5-125c-4e0f-8c4f-b522617b2480",
+            "x_opencti_type": "Intrusion-Set",
+            "type": "intrusion-set",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed"
+            ]
+        },
+        {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:CLEAR",
+            "definition": {
+                "tlp": "clear"
+            }
+        },
+        {
+            "id": "identity--e9733fd8-66fa-5939-ab49-ce1f75e6ccb5",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2024-10-19T17:35:33.757Z",
+            "modified": "2024-11-25T07:50:33.233Z",
+            "identity_class": "organization",
+            "name": "Suefin Data Solution",
+            "description": "Suefin Data Solutions is a fictional technology company specializing in cloud-native services and data management solutions. The company is known for its innovative approach to leveraging Kubernetes for scalable infrastructure and rapid deployment of microservices. With a focus on data analytics, storage, and processing, Suefin Data Solutions serves a global client base, providing cutting-edge solutions for businesses looking to optimize their cloud environments and data workflows.\n\nThe company prides itself on pushing the boundaries of modern data technologies while maintaining a strong commitment to security and reliability in cloud computing.",
+            "x_opencti_reliability": "C - Fairly reliable",
+            "x_opencti_organization_type": "other",
+            "labels": [
+                "suefindatasolutions"
+            ],
+            "external_references": [
+                {
+                    "source_name": "Suefin Data Solutions",
+                    "description": "Suefin Data Solutions is a fictional technology company specializing in cloud-native services and data management solutions. The company is known for its innovative approach to leveraging Kubernetes for scalable infrastructure and rapid deployment of microservices. With a focus on data analytics, storage, and processing, Suefin Data Solutions serves a global client base, providing cutting-edge solutions for businesses looking to optimize their cloud environments and data workflows.\n\nThe company prides itself on pushing the boundaries of modern data technologies while maintaining a strong commitment to security and reliability in cloud computing.",
+                    "url": "http://suefindatasolutions.ch"
+                }
+            ],
+            "x_opencti_id": "aaabdb07-8bba-429a-b4af-38b88ff24313",
+            "x_opencti_type": "Organization",
+            "type": "identity",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9"
+            ]
+        },
+        {
+            "id": "tool--5db18f5e-4ca6-5bf4-aecc-5e28007ac934",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2024-10-20T20:16:45.238Z",
+            "modified": "2024-11-25T07:50:33.226Z",
+            "name": "kubectl",
+            "description": "kubectl is a command-line interface (CLI) tool used to interact with Kubernetes clusters. It enables users to perform operations on Kubernetes clusters, such as deploying applications, inspecting resources, and managing configurations.\n\nIndicators of Compromise (IOCs) Related to kubectl Use\nWhen kubectl is used in a suspicious or unauthorized manner, certain IOCs may be present:\n\nUnusual kubectl command executions detected in audit logs.\nkubectl commands originating from unexpected locations or IP addresses, suggesting unauthorized remote access.\nFrequent deployment or deletion of containers that do not align with regular operational patterns.\nModifications to Kubernetes configurations or policies, such as changes in RBAC roles or NetworkPolicies.\n\nDetection and Mitigation Strategies\nDetection\nMonitor Kubernetes Audit Logs: Look for suspicious kubectl commands, especially those involving exec, apply, or create operations.\nImplement Behavioral Analytics: Analyze command patterns to detect deviations from normal usage.\nUse Role-Based Access Control (RBAC) to Restrict kubectl Usage: Limit who can execute kubectl commands to essential personnel only.\nMitigation\nEnforce Least Privilege Access: Limit permissions in Kubernetes using RBAC to reduce the potential impact of a compromised account.\nImplement Network Segmentation: Restrict access to the Kubernetes API server, ensuring only authorized systems can communicate with it.\nUse Multi-Factor Authentication (MFA): Protect accounts that have the ability to execute kubectl with MFA.",
+            "tool_types": [
+                "information-gathering",
+                "network-capture",
+                "credential-exploitation",
+                "remote-access"
+            ],
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "execution",
+                    "x_opencti_order": 0
+                },
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "defense-evasion",
+                    "x_opencti_order": 0
+                },
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "persistence",
+                    "x_opencti_order": 0
+                },
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "discovery",
+                    "x_opencti_order": 0
+                }
+            ],
+            "x_opencti_id": "07a4e000-c3e8-48fb-a746-1fd19d0d6839",
+            "x_opencti_type": "Tool",
+            "type": "tool",
+            "created_by_ref": "identity--baac22aa-91cb-5f82-97fa-cad48cc8031c"
+        },
+        {
+            "id": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "spec_version": "2.1",
+            "identity_class": "organization",
+            "name": "The MITRE Corporation",
+            "created": "2024-11-07T09:14:18.010Z",
+            "modified": "2024-11-21T19:32:46.251Z",
+            "x_opencti_id": "a5c6ebb3-4c1c-4749-b3fe-a2665d7b5d81",
+            "x_opencti_type": "Organization",
+            "type": "identity"
+        },
+        {
+            "id": "vulnerability--328c381f-c00f-51e4-bb39-e61a626c2964",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2023-07-03T21:15:00.000Z",
+            "modified": "2024-11-25T07:50:33.164Z",
+            "name": "CVE-2023-2727",
+            "description": "Users may be able to launch containers using images that are restricted by ImagePolicyWebhook when using ephemeral containers. Kubernetes clusters are only affected if the ImagePolicyWebhook admission plugin is used together with ephemeral containers.",
+            "x_opencti_cvss_base_score": 6.5,
+            "x_opencti_cvss_base_severity": "MEDIUM",
+            "x_opencti_cvss_attack_vector": "NETWORK",
+            "x_opencti_cvss_integrity_impact": "HIGH",
+            "x_opencti_cvss_availability_impact": "NONE",
+            "x_opencti_cvss_confidentiality_impact": "HIGH",
+            "x_opencti_cisa_kev": false,
+            "external_references": [
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://security.netapp.com/advisory/ntap-20230803-0004/"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://groups.google.com/g/kubernetes-security-announce/c/vPWYJ_L84m8"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://github.com/kubernetes/kubernetes/issues/118640"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "http://www.openwall.com/lists/oss-security/2023/07/06/2"
+                },
+                {
+                    "source_name": "NIST NVD",
+                    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-2727"
+                }
+            ],
+            "x_opencti_id": "617489fe-733b-4e39-8afb-39bd1f90d14a",
+            "x_opencti_type": "Vulnerability",
+            "type": "vulnerability",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94"
+        },
+        {
+            "id": "vulnerability--5e16ee8f-7b49-58e6-8757-13058486cd1a",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2023-06-16T08:15:00.000Z",
+            "modified": "2024-12-12T17:28:53.915Z",
+            "name": "CVE-2023-2431",
+            "description": "A security issue was discovered in Kubelet that allows pods to bypass the seccomp profile enforcement. Pods that use localhost type for seccomp profile but specify an empty profile field, are affected by this issue. In this scenario, this vulnerability allows the pod to run in unconfined (seccomp disabled) mode. This bug affects Kubelet.",
+            "x_opencti_cvss_base_score": 3.4,
+            "x_opencti_cvss_base_severity": "LOW",
+            "x_opencti_cvss_attack_vector": "LOCAL",
+            "x_opencti_cvss_integrity_impact": "LOW",
+            "x_opencti_cvss_availability_impact": "NONE",
+            "x_opencti_cvss_confidentiality_impact": "LOW",
+            "x_opencti_cisa_kev": false,
+            "external_references": [
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XBX4RL4UOC7JHWWYB2AJCKSUM7EG5Y5G/"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/43HDSKBKPSW53OW647B5ETHRWFFNHSRQ/"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://groups.google.com/g/kubernetes-security-announce/c/QHmx0HOQa10"
+                },
+                {
+                    "source_name": "jordan@liggitt.net",
+                    "url": "https://github.com/kubernetes/kubernetes/issues/118690"
+                },
+                {
+                    "source_name": "NIST NVD",
+                    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-2431"
+                }
+            ],
+            "x_opencti_id": "4e11d5eb-ce3d-4827-95a4-ddb884943c79",
+            "x_opencti_type": "Vulnerability",
+            "type": "vulnerability",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94"
+        },
+        {
+            "id": "identity--e52b2fa3-2af0-5e53-ad38-17d54b3d61cb",
+            "spec_version": "2.1",
+            "identity_class": "organization",
+            "name": "AlienVault",
+            "created": "2024-11-09T19:02:51.562Z",
+            "modified": "2024-11-25T07:50:31.830Z",
+            "x_opencti_id": "afac7eb2-8d8f-4943-857e-f74391776fae",
+            "x_opencti_type": "Organization",
+            "type": "identity"
+        },
+        {
+            "id": "identity--2f6ecdec-9fc8-5055-8638-f1372fac5a24",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 50,
+            "created": "2024-11-09T20:25:36.260Z",
+            "modified": "2024-11-25T07:50:32.988Z",
+            "identity_class": "class",
+            "name": "IT Services",
+            "x_opencti_id": "74c15354-93c0-4f33-bd3d-90b4e080beab",
+            "x_opencti_type": "Sector",
+            "type": "identity",
+            "created_by_ref": "identity--e52b2fa3-2af0-5e53-ad38-17d54b3d61cb"
+        },
+        {
+            "id": "attack-pattern--1d391f08-536b-5123-9178-5c509ef94ec9",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 50,
+            "created": "2024-11-09T19:10:24.182Z",
+            "modified": "2024-11-25T07:50:33.601Z",
+            "name": "TA0008",
+            "x_mitre_id": "TA0008",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/TA0008",
+                    "external_id": "TA0008"
+                }
+            ],
+            "x_opencti_id": "c7a37515-602e-4f5a-9d1b-643a845b49d0",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--e52b2fa3-2af0-5e53-ad38-17d54b3d61cb",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9"
+            ]
+        },
+        {
+            "id": "software--96ea9bba-8ee7-5de0-9b86-4730db8acfaf",
+            "spec_version": "2.1",
+            "name": "Kubernetes",
+            "cpe": "cpe:2.3:a:kubernetes:kubernetes:-:*:*:*:*:*:*:*",
+            "vendor": "kubernetes",
+            "version": "-",
+            "x_opencti_id": "8826f4d3-73c1-4bfa-bc55-b99e26073cba",
+            "x_opencti_type": "Software",
+            "type": "software"
+        },
+        {
+            "id": "attack-pattern--2aa544df-6e7c-5c5c-b870-b8a6a741f1b6",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2014-06-23T00:00:00.000Z",
+            "modified": "2024-11-25T07:50:34.454Z",
+            "name": "Spear Phishing",
+            "description": "An adversary targets a specific user or group with a Phishing (CAPEC-98) attack tailored to a category of users in order to have maximum relevance and deceptive capability. Spear Phishing is an enhanced version of the Phishing attack targeted to a specific user or group. The quality of the targeted email is usually enhanced by appearing to come from a known or trusted entity. If the email account of some trusted entity has been compromised the message may be digitally signed. The message will contain information specific to the targeted users that will enhance the probability that they will follow the URL to the compromised site. For example, the message may indicate knowledge of the targets employment, residence, interests, or other information that suggests familiarity. As soon as the user follows the instructions in the message, the attack proceeds as a standard Phishing attack.",
+            "external_references": [
+                {
+                    "source_name": "ATTACK",
+                    "description": "Phishing for Information: Spearfishing Link",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1598/003",
+                    "external_id": "T1598.003"
+                },
+                {
+                    "source_name": "ATTACK",
+                    "description": "Phishing for Information: Spearfishing Attachment",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1598/002",
+                    "external_id": "T1598.002"
+                },
+                {
+                    "source_name": "ATTACK",
+                    "description": "Phishing for Information: Spearfishing Service",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1598/001",
+                    "external_id": "T1598.001"
+                },
+                {
+                    "source_name": "ATTACK",
+                    "description": "Phishing: Spearfishing via Service",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1566/003",
+                    "external_id": "T1566.003"
+                },
+                {
+                    "source_name": "ATTACK",
+                    "description": "Phishing: Spearfishing Link",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1566/002",
+                    "external_id": "T1566.002"
+                },
+                {
+                    "source_name": "ATTACK",
+                    "description": "Phishing: Spearfishing Attachment",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1566/001",
+                    "external_id": "T1566.001"
+                },
+                {
+                    "source_name": "ATTACK",
+                    "description": "Internal Spearfishing",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1534",
+                    "external_id": "T1534"
+                },
+                {
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/163.html",
+                    "external_id": "CAPEC-163"
+                },
+                {
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/451.html",
+                    "external_id": "CWE-451"
+                }
+            ],
+            "x_opencti_id": "73094beb-83aa-492e-b76d-6319ee444184",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9"
+            ]
+        },
+        {
+            "id": "software--55e26346-3c86-5c8a-b8bd-7abd47c70ed9",
+            "spec_version": "2.1",
+            "name": "Red Hat Linux",
+            "cpe": "cpe:2.3:o:redhat:linux:-:*:*:*:*:*:*:*",
+            "vendor": "redhat",
+            "version": "-",
+            "x_opencti_id": "e1cd160f-2790-43e4-aba3-1e1ff1f5d595",
+            "x_opencti_type": "Software",
+            "type": "software"
+        },
+        {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a",
+            "created": "2017-06-01T00:00:00.000Z",
+            "definition_type": "statement",
+            "name": "copyright 2015-2024, the mitre corporation. mitre att&ck and att&ck are registered trademarks of the mitre corporation.",
+            "definition": {
+                "statement": "copyright 2015-2024, the mitre corporation. mitre att&ck and att&ck are registered trademarks of the mitre corporation."
+            }
+        },
+        {
+            "id": "tool--9fff8fa6-620a-5f97-9a1c-6779b7abb82b",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2021-03-18T13:39:27.676Z",
+            "modified": "2024-11-25T07:50:34.918Z",
+            "name": "ConnectWise",
+            "description": "[ConnectWise](https://attack.mitre.org/software/S0591) is a legitimate remote administration tool that has been used since at least 2016 by threat actors including [MuddyWater](https://attack.mitre.org/groups/G0069) and [GOLD SOUTHFIELD](https://attack.mitre.org/groups/G0115) to connect to and conduct lateral movement in target environments.(Citation: Anomali Static Kitten February 2021)(Citation: Trend Micro Muddy Water March 2021)",
+            "aliases": [
+                "ScreenConnect"
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/software/S0591",
+                    "external_id": "S0591"
+                },
+                {
+                    "source_name": "Trend Micro Muddy Water March 2021",
+                    "description": "Peretz, A. and Theck, E. (2021, March 5). Earth Vetala \u2013 MuddyWater Continues to Target Organizations in the Middle East. Retrieved March 18, 2021.",
+                    "url": "https://www.trendmicro.com/en_us/research/21/c/earth-vetala---muddywater-continues-to-target-organizations-in-t.html"
+                },
+                {
+                    "source_name": "Anomali Static Kitten February 2021",
+                    "description": "Mele, G. et al. (2021, February 10). Probable Iranian Cyber Actors, Static Kitten, Conducting Cyberespionage Campaign Targeting UAE and Kuwait Government Agencies. Retrieved March 17, 2021.",
+                    "url": "https://www.anomali.com/blog/probable-iranian-cyber-actors-static-kitten-conducting-cyberespionage-campaign-targeting-uae-and-kuwait-government-agencies"
+                }
+            ],
+            "x_opencti_id": "407030e1-1dfe-484f-84e0-b5bfda478161",
+            "x_opencti_type": "Tool",
+            "type": "tool",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "vulnerability--20c2770b-7005-5923-ba46-f5b7fd4bc8d6",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2022-04-25T00:00:00.000Z",
+            "modified": "2024-11-25T07:50:34.245Z",
+            "name": "CVE-2022-0847",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "x_opencti_cvss_base_score": 7.8,
+            "x_opencti_cvss_base_severity": "HIGH",
+            "x_opencti_cvss_attack_vector": "LOCAL",
+            "x_opencti_cvss_integrity_impact": "HIGH",
+            "x_opencti_cvss_availability_impact": "HIGH",
+            "x_opencti_cvss_confidentiality_impact": "HIGH",
+            "x_opencti_cisa_kev": true,
+            "external_references": [
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "http://packetstormsecurity.com/files/166229/Dirty-Pipe-Linux-Privilege-Escalation.html"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "http://packetstormsecurity.com/files/166230/Dirty-Pipe-SUID-Binary-Hijack-Privilege-Escalation.html"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "http://packetstormsecurity.com/files/166258/Dirty-Pipe-Local-Privilege-Escalation.html"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "http://packetstormsecurity.com/files/176534/Linux-4.20-KTLS-Read-Only-Write.html"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2060795"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-222547.pdf"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://dirtypipe.cm4all.com/"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2022-0015"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://security.netapp.com/advisory/ntap-20220325-0005/"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://www.suse.com/support/kb/doc/?id=000020603"
+                },
+                {
+                    "source_name": "NIST NVD",
+                    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0847",
+                    "external_id": "CVE-2022-0847"
+                }
+            ],
+            "x_opencti_id": "55014e68-848a-4948-b6b7-a24c52ee9cac",
+            "x_opencti_type": "Vulnerability",
+            "type": "vulnerability",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9"
+            ]
+        },
+        {
+            "id": "attack-pattern--53ad4a19-cc4b-5a4d-9ba7-c1a1af4b1751",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2020-03-15T16:13:46.151Z",
+            "modified": "2024-11-25T07:50:35.142Z",
+            "name": "Web Protocols",
+            "description": "Adversaries may communicate using application layer protocols associated with web traffic to avoid detection/network filtering by blending in with existing traffic. Commands to the remote system, and often the results of those commands, will be embedded within the protocol traffic between the client and server. \n\nProtocols such as HTTP/S(Citation: CrowdStrike Putter Panda) and WebSocket(Citation: Brazking-Websockets) that carry web traffic may be very common in environments. HTTP/S packets have many fields and headers in which data can be concealed. An adversary may abuse these protocols to communicate with systems under their control within a victim network while also mimicking normal, expected traffic.",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows"
+            ],
+            "x_mitre_detection": "Analyze network data for uncommon data flows (e.g., a client sending significantly more data than it receives from a server). Processes utilizing the network that do not normally have network communication or have never been seen before are suspicious. Analyze packet contents to detect application layer protocols that do not follow the expected protocol standards regarding syntax, structure, or any other variable adversaries could leverage to conceal data.(Citation: University of Birmingham C2)\n\nMonitor for web traffic to/from known-bad or suspicious domains.",
+            "x_mitre_id": "T1071.001",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "command-and-control",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "Brazking-Websockets",
+                    "description": "Shahar Tavor. (n.d.). BrazKing Android Malware Upgraded and Targeting Brazilian Banks. Retrieved March 24, 2023.",
+                    "url": "https://securityintelligence.com/posts/brazking-android-malware-upgraded-targeting-brazilian-banks/"
+                },
+                {
+                    "source_name": "CrowdStrike Putter Panda",
+                    "description": "Crowdstrike Global Intelligence Team. (2014, June 9). CrowdStrike Intelligence Report: Putter Panda. Retrieved January 22, 2016.",
+                    "url": "http://cdn0.vox-cdn.com/assets/4589853/crowdstrike-intelligence-report-putter-panda.original.pdf"
+                },
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1071/001",
+                    "external_id": "T1071.001"
+                },
+                {
+                    "source_name": "University of Birmingham C2",
+                    "description": "Gardiner, J.,  Cova, M., Nagaraja, S. (2014, February). Command & Control Understanding, Denying and Detecting. Retrieved April 20, 2016.",
+                    "url": "https://arxiv.org/ftp/arxiv/papers/1408/1408.1136.pdf"
+                }
+            ],
+            "x_opencti_id": "b9bc63ea-2d5d-4d9b-958d-9d09a55b5e4a",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:GREEN",
+            "definition": {
+                "tlp": "green"
+            }
+        },
+        {
+            "id": "attack-pattern--8d8ce1ff-70fb-5ca5-8e15-7ec71477190e",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2020-03-09T15:04:32.767Z",
+            "modified": "2024-11-25T07:50:35.121Z",
+            "name": "Exfiltration to Cloud Storage",
+            "description": "Adversaries may exfiltrate data to a cloud storage service rather than over their primary command and control channel. Cloud storage services allow for the storage, edit, and retrieval of data from a remote cloud storage server over the Internet.\n\nExamples of cloud storage services include Dropbox and Google Docs. Exfiltration to these cloud storage services can provide a significant amount of cover to the adversary if hosts within the network are already communicating with the service.",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows"
+            ],
+            "x_mitre_detection": "Analyze network data for uncommon data flows (e.g., a client sending significantly more data than it receives from a server) to known cloud storage services. Processes utilizing the network that do not normally have network communication or have never been seen before are suspicious. User behavior monitoring may help to detect abnormal patterns of activity.",
+            "x_mitre_id": "T1567.002",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "exfiltration",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1567/002",
+                    "external_id": "T1567.002"
+                }
+            ],
+            "x_opencti_id": "cd882267-d5c6-4a6a-aed7-6748e1a119e3",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "attack-pattern--5d2a0e29-a53f-5e67-b604-668b3e1daa7a",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2017-05-31T21:30:55.066Z",
+            "modified": "2024-11-25T07:50:35.408Z",
+            "name": "Exploitation for Privilege Escalation",
+            "description": "Adversaries may exploit software vulnerabilities in an attempt to elevate privileges. Exploitation of a software vulnerability occurs when an adversary takes advantage of a programming error in a program, service, or within the operating system software or kernel itself to execute adversary-controlled code. Security constructs such as permission levels will often hinder access to information and use of certain techniques, so adversaries will likely need to perform privilege escalation to include use of software exploitation to circumvent those restrictions.\n\nWhen initially gaining access to a system, an adversary may be operating within a lower privileged process which will prevent them from accessing certain resources on the system. Vulnerabilities may exist, usually in operating system components and software commonly running at higher permissions, that can be exploited to gain higher levels of access on the system. This could enable someone to move from unprivileged or user level permissions to SYSTEM or root permissions depending on the component that is vulnerable. This could also enable an adversary to move from a virtualized environment, such as within a virtual machine or container, onto the underlying host. This may be a necessary step for an adversary compromising an endpoint system that has been properly configured and limits other privilege escalation methods.\n\nAdversaries may bring a signed vulnerable driver onto a compromised machine so that they can exploit the vulnerability to execute code in kernel mode. This process is sometimes referred to as Bring Your Own Vulnerable Driver (BYOVD).(Citation: ESET InvisiMole June 2020)(Citation: Unit42 AcidBox June 2020) Adversaries may include the vulnerable driver with files delivered during Initial Access or download it to a compromised system via [Ingress Tool Transfer](https://attack.mitre.org/techniques/T1105) or [Lateral Tool Transfer](https://attack.mitre.org/techniques/T1570).",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows",
+                "Containers"
+            ],
+            "x_mitre_permissions_required": [
+                "User"
+            ],
+            "x_mitre_detection": "Detecting software exploitation may be difficult depending on the tools available. Software exploits may not always succeed or may cause the exploited process to become unstable or crash. Also look for behavior on the endpoint system that might indicate successful compromise, such as abnormal behavior of the processes. This could include suspicious files written to disk, evidence of [Process Injection](https://attack.mitre.org/techniques/T1055) for attempts to hide execution or evidence of Discovery. Consider monitoring for the presence or loading (ex: Sysmon Event ID 6) of known vulnerable drivers that adversaries may drop and exploit to execute code in kernel mode.(Citation: Microsoft Driver Block Rules)\n\nHigher privileges are often necessary to perform additional actions such as some methods of [OS Credential Dumping](https://attack.mitre.org/techniques/T1003). Look for additional activity that may indicate an adversary has gained higher privileges.",
+            "x_mitre_id": "T1068",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "privilege-escalation",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "Microsoft Driver Block Rules",
+                    "description": "Microsoft. (2020, October 15). Microsoft recommended driver block rules. Retrieved March 16, 2021.",
+                    "url": "https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules"
+                },
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1068",
+                    "external_id": "T1068"
+                },
+                {
+                    "source_name": "Unit42 AcidBox June 2020",
+                    "description": "Reichel, D. and Idrizovic, E. (2020, June 17). AcidBox: Rare Malware Repurposing Turla Group Exploit Targeted Russian Organizations. Retrieved March 16, 2021.",
+                    "url": "https://unit42.paloaltonetworks.com/acidbox-rare-malware/"
+                },
+                {
+                    "source_name": "ESET InvisiMole June 2020",
+                    "description": "Hromcova, Z. and Cherpanov, A. (2020, June). INVISIMOLE: THE HIDDEN PART OF THE STORY. Retrieved July 16, 2020.",
+                    "url": "https://www.welivesecurity.com/wp-content/uploads/2020/06/ESET_InvisiMole.pdf"
+                }
+            ],
+            "x_opencti_id": "6cefdaeb-ecb2-4812-97b3-ff661039f6f3",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "attack-pattern--dda9cad8-fd58-5908-9c31-f13e4d1afd0d",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2020-02-21T20:32:20.810Z",
+            "modified": "2024-11-25T07:50:36.114Z",
+            "name": "Disable or Modify Tools",
+            "description": "Adversaries may modify and/or disable security tools to avoid possible detection of their malware/tools and activities. This may take many forms, such as killing security software processes or services, modifying / deleting Registry keys or configuration files so that tools do not operate properly, or other methods to interfere with security tools scanning or reporting information. Adversaries may also disable updates to prevent the latest security patches from reaching tools on victim systems.(Citation: SCADAfence_ransomware)\n\nAdversaries may also tamper with artifacts deployed and utilized by security tools. Security tools may make dynamic changes to system components in order to maintain visibility into specific events. For example, security products may load their own modules and/or modify those loaded by processes to facilitate data collection. Similar to [Indicator Blocking](https://attack.mitre.org/techniques/T1562/006), adversaries may unhook or otherwise modify these features added by tools (especially those that exist in userland or are otherwise potentially accessible to adversaries) to avoid detection.(Citation: OutFlank System Calls)(Citation: MDSec System Calls) \n\nAdversaries may also focus on specific applications such as Sysmon. For example, the \u201cStart\u201d and \u201cEnable\u201d values in `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\EventLog-Microsoft-Windows-Sysmon-Operational` may be modified to tamper with and potentially disable Sysmon logging.(Citation: disable_win_evt_logging) \n\nOn network devices, adversaries may attempt to skip digital signature verification checks by altering startup configuration files and effectively disabling firmware verification that typically occurs at boot.(Citation: Fortinet Zero-Day and Custom Malware Used by Suspected Chinese Actor in Espionage Operation)(Citation: Analysis of FG-IR-22-369)\n\nIn cloud environments, tools disabled by adversaries may include cloud monitoring agents that report back to services such as AWS CloudWatch or Google Cloud Monitor.\n\nFurthermore, although defensive tools may have anti-tampering mechanisms, adversaries may abuse tools such as legitimate rootkit removal kits to impair and/or disable these tools.(Citation: chasing_avaddon_ransomware)(Citation: dharma_ransomware)(Citation: demystifying_ryuk)(Citation: doppelpaymer_crowdstrike) For example, adversaries have used tools such as GMER to find and shut down hidden processes and antivirus software on infected systems.(Citation: demystifying_ryuk)\n\nAdditionally, adversaries may exploit legitimate drivers from anti-virus software to gain access to kernel space (i.e. [Exploitation for Privilege Escalation](https://attack.mitre.org/techniques/T1068)), which may lead to bypassing anti-tampering features.(Citation: avoslocker_ransomware)",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows",
+                "Containers",
+                "IaaS"
+            ],
+            "x_mitre_detection": "Monitor processes and command-line arguments to see if security tools/services are killed or stop running. Monitor Registry edits for modifications to services and startup programs that correspond to security tools. Monitoring for changes to other known features used by deployed security tools may also expose malicious activity.\n\nLack of expected log events may be suspicious.",
+            "x_mitre_id": "T1562.001",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "defense-evasion",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "demystifying_ryuk",
+                    "description": "Tran, T. (2020, November 24). Demystifying Ransomware Attacks Against Microsoft Defender Solution. Retrieved January 26, 2022.",
+                    "url": "https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/demystifying-ransomware-attacks-against-microsoft-defender/ba-p/1928947"
+                },
+                {
+                    "source_name": "SCADAfence_ransomware",
+                    "description": "Shaked, O. (2020, January 20). Anatomy of a Targeted Ransomware Attack. Retrieved June 18, 2022.",
+                    "url": "https://cdn.logic-control.com/docs/scadafence/Anatomy-Of-A-Targeted-Ransomware-Attack-WP.pdf"
+                },
+                {
+                    "source_name": "dharma_ransomware",
+                    "description": "Loui, E. Scheuerman, K. et al. (2020, April 16). Targeted Dharma Ransomware Intrusions Exhibit Consistent Techniques. Retrieved January 26, 2022.",
+                    "url": "https://www.crowdstrike.com/blog/targeted-dharma-ransomware-intrusions-exhibit-consistent-techniques/"
+                },
+                {
+                    "source_name": "avoslocker_ransomware",
+                    "description": "Lakshmanan, R. (2022, May 2). AvosLocker Ransomware Variant Using New Trick to Disable Antivirus Protection. Retrieved May 17, 2022.",
+                    "url": "https://thehackernews.com/2022/05/avoslocker-ransomware-variant-using-new.html"
+                },
+                {
+                    "source_name": "doppelpaymer_crowdstrike",
+                    "description": "Hurley, S. (2021, December 7). Critical Hit: How DoppelPaymer Hunts and Kills Windows Processes. Retrieved January 26, 2022.",
+                    "url": "https://www.crowdstrike.com/blog/how-doppelpaymer-hunts-and-kills-windows-processes/"
+                },
+                {
+                    "source_name": "chasing_avaddon_ransomware",
+                    "description": "Hernandez, A. S. Tarter, P. Ocamp, E. J. (2022, January 19). One Source to Rule Them All: Chasing AVADDON Ransomware. Retrieved January 26, 2022.",
+                    "url": "https://www.mandiant.com/resources/chasing-avaddon-ransomware"
+                },
+                {
+                    "source_name": "Analysis of FG-IR-22-369",
+                    "description": "Guillaume Lovet and Alex Kong. (2023, March 9). Analysis of FG-IR-22-369. Retrieved May 15, 2023.",
+                    "url": "https://www.fortinet.com/blog/psirt-blogs/fg-ir-22-369-psirt-analysis"
+                },
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1562/001",
+                    "external_id": "T1562.001"
+                },
+                {
+                    "source_name": "disable_win_evt_logging",
+                    "description": "Heiligenstein, L. (n.d.). REP-25: Disable Windows Event Logging. Retrieved April 7, 2022.",
+                    "url": "https://ptylu.github.io/content/report/report.html?report=25"
+                },
+                {
+                    "source_name": "MDSec System Calls",
+                    "description": "MDSec Research. (2020, December). Bypassing User-Mode Hooks and Direct Invocation of System Calls for Red Teams. Retrieved September 29, 2021.",
+                    "url": "https://www.mdsec.co.uk/2020/12/bypassing-user-mode-hooks-and-direct-invocation-of-system-calls-for-red-teams/"
+                },
+                {
+                    "source_name": "OutFlank System Calls",
+                    "description": "de Plaa, C. (2019, June 19). Red Team Tactics: Combining Direct System Calls and sRDI to bypass AV/EDR. Retrieved September 29, 2021.",
+                    "url": "https://outflank.nl/blog/2019/06/19/red-team-tactics-combining-direct-system-calls-and-srdi-to-bypass-av-edr/"
+                },
+                {
+                    "source_name": "Mandiant Fortinet Zero Day",
+                    "description": "ALEXANDER MARVI, BRAD SLAYBAUGH, DAN EBREO, TUFAIL AHMED, MUHAMMAD UMAIR, TINA JOHNSON. (2023, March 16). Fortinet Zero-Day and Custom Malware Used by Suspected Chinese Actor in Espionage Operation. Retrieved May 15, 2023.",
+                    "url": "https://www.mandiant.com/resources/blog/fortinet-malware-ecosystem"
+                }
+            ],
+            "x_opencti_id": "e9289f1f-beed-40e0-90f1-dd9715ac6c89",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "attack-pattern--5a9d0c10-3eab-5b54-9d30-d9ae590d238b",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2020-03-09T13:48:55.078Z",
+            "modified": "2024-11-25T07:50:35.841Z",
+            "name": "PowerShell",
+            "description": "Adversaries may abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system.(Citation: TechNet PowerShell) Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code. Examples include the `Start-Process` cmdlet which can be used to run an executable and the `Invoke-Command` cmdlet which runs a command locally or on a remote computer (though administrator permissions are required to use PowerShell to connect to remote systems).\n\nPowerShell may also be used to download and run executables from the Internet, which can be executed from disk or in memory without touching disk.\n\nA number of PowerShell-based offensive testing tools are available, including [Empire](https://attack.mitre.org/software/S0363),  [PowerSploit](https://attack.mitre.org/software/S0194), [PoshC2](https://attack.mitre.org/software/S0378), and PSAttack.(Citation: Github PSAttack)\n\nPowerShell commands/scripts can also be executed without directly invoking the `powershell.exe` binary through interfaces to PowerShell's underlying `System.Management.Automation` assembly DLL exposed through the .NET framework and Windows Common Language Interface (CLI).(Citation: Sixdub PowerPick Jan 2016)(Citation: SilentBreak Offensive PS Dec 2015)(Citation: Microsoft PSfromCsharp APR 2014)",
+            "x_mitre_platforms": [
+                "windows"
+            ],
+            "x_mitre_detection": "If proper execution policy is set, adversaries will likely be able to define their own execution policy if they obtain administrator or system access, either through the Registry or at the command line. This change in policy on a system may be a way to detect malicious use of PowerShell. If PowerShell is not used in an environment, then simply looking for PowerShell execution may detect malicious activity.\n\nMonitor for loading and/or execution of artifacts associated with PowerShell specific assemblies, such as System.Management.Automation.dll (especially to unusual process names/locations).(Citation: Sixdub PowerPick Jan 2016)(Citation: SilentBreak Offensive PS Dec 2015)\n\nIt is also beneficial to turn on PowerShell logging to gain increased fidelity in what occurs during execution (which is applied to .NET invocations). (Citation: Malware Archaeology PowerShell Cheat Sheet) PowerShell 5.0 introduced enhanced logging capabilities, and some of those features have since been added to PowerShell 4.0. Earlier versions of PowerShell do not have many logging features.(Citation: FireEye PowerShell Logging 2016) An organization can gather PowerShell execution details in a data analytic platform to supplement it with other data.\n\nConsider monitoring for Windows event ID (EID) 400, which shows the version of PowerShell executing in the <code>EngineVersion</code> field (which may also be relevant to detecting a potential [Downgrade Attack](https://attack.mitre.org/techniques/T1562/010)) as well as if PowerShell is running locally or remotely in the <code>HostName</code> field. Furthermore, EID 400 may indicate the start time and EID 403 indicates the end time of a PowerShell session.(Citation: inv_ps_attacks)",
+            "x_mitre_id": "T1059.001",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "execution",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "Github PSAttack",
+                    "description": "Haight, J. (2016, April 21). PS>Attack. Retrieved June 1, 2016.",
+                    "url": "https://github.com/jaredhaight/PSAttack"
+                },
+                {
+                    "source_name": "Sixdub PowerPick Jan 2016",
+                    "description": "Warner, J.. (2015, January 6). Inexorable PowerShell \u2013 A Red Teamer\u2019s Tale of Overcoming Simple AppLocker Policies. Retrieved December 8, 2018.",
+                    "url": "https://web.archive.org/web/20160327101330/http://www.sixdub.net/?p=367"
+                },
+                {
+                    "source_name": "TechNet PowerShell",
+                    "description": "Microsoft. (n.d.). Windows PowerShell Scripting. Retrieved April 28, 2016.",
+                    "url": "https://technet.microsoft.com/en-us/scriptcenter/dd742419.aspx"
+                },
+                {
+                    "source_name": "Github PSAttack",
+                    "description": "Haight, J. (2016, April 21). PS>Attack. Retrieved September 27, 2024.",
+                    "url": "https://github.com/Exploit-install/PSAttack-1"
+                },
+                {
+                    "source_name": "FireEye PowerShell Logging 2016",
+                    "description": "Dunwoody, M. (2016, February 11). Greater Visibility Through PowerShell Logging. Retrieved September 28, 2021.",
+                    "url": "https://www.fireeye.com/blog/threat-research/2016/02/greater_visibilityt.html"
+                },
+                {
+                    "source_name": "SilentBreak Offensive PS Dec 2015",
+                    "description": "Christensen, L.. (2015, December 28). The Evolution of Offensive PowerShell Invocation. Retrieved December 8, 2018.",
+                    "url": "https://web.archive.org/web/20190508170150/https://silentbreaksecurity.com/powershell-jobs-without-powershell-exe/"
+                },
+                {
+                    "source_name": "Microsoft PSfromCsharp APR 2014",
+                    "description": "Babinec, K. (2014, April 28). Executing PowerShell scripts from C#. Retrieved April 22, 2019.",
+                    "url": "https://blogs.msdn.microsoft.com/kebab/2014/04/28/executing-powershell-scripts-from-c/"
+                },
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1059/001",
+                    "external_id": "T1059.001"
+                },
+                {
+                    "source_name": "inv_ps_attacks",
+                    "description": "Hastings, M. (2014, July 16). Investigating PowerShell Attacks. Retrieved December 1, 2021.",
+                    "url": "https://powershellmagazine.com/2014/07/16/investigating-powershell-attacks/"
+                },
+                {
+                    "source_name": "Malware Archaeology PowerShell Cheat Sheet",
+                    "description": "Malware Archaeology. (2016, June). WINDOWS POWERSHELL LOGGING CHEAT SHEET - Win 7/Win 2008 or later. Retrieved June 24, 2016.",
+                    "url": "http://www.malwarearchaeology.com/s/Windows-PowerShell-Logging-Cheat-Sheet-ver-June-2016-v2.pdf"
+                }
+            ],
+            "x_opencti_id": "e9e24ab9-c693-4c1d-9770-739f1a8a2fed",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "attack-pattern--f236ced8-1590-510c-800a-47476fd66557",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2017-05-31T21:30:29.458Z",
+            "modified": "2024-11-25T07:50:35.485Z",
+            "name": "Automated Exfiltration",
+            "description": "Adversaries may exfiltrate data, such as sensitive documents, through the use of automated processing after being gathered during Collection.(Citation: ESET Gamaredon June 2020) \n\nWhen automated exfiltration is used, other exfiltration techniques likely apply as well to transfer the information out of the network, such as [Exfiltration Over C2 Channel](https://attack.mitre.org/techniques/T1041) and [Exfiltration Over Alternative Protocol](https://attack.mitre.org/techniques/T1048).",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows"
+            ],
+            "x_mitre_detection": "Monitor process file access patterns and network behavior. Unrecognized processes or scripts that appear to be traversing file systems and sending network traffic may be suspicious.",
+            "x_mitre_id": "T1020",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "exfiltration",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "ESET Gamaredon June 2020",
+                    "description": "Boutin, J. (2020, June 11). Gamaredon group grows its game. Retrieved June 16, 2020.",
+                    "url": "https://www.welivesecurity.com/2020/06/11/gamaredon-group-grows-its-game/"
+                },
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1020",
+                    "external_id": "T1020"
+                }
+            ],
+            "x_opencti_id": "0c34924f-4256-43ab-b067-02d1eb0b3d27",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "attack-pattern--e498ecdd-212a-55a0-9bbc-ae2728e40682",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2020-02-04T12:47:23.631Z",
+            "modified": "2024-11-25T07:50:36.106Z",
+            "name": "Unsecured Credentials",
+            "description": "Adversaries may search compromised systems to find and obtain insecurely stored credentials. These credentials can be stored and/or misplaced in many locations on a system, including plaintext files (e.g. [Bash History](https://attack.mitre.org/techniques/T1552/003)), operating system or application-specific repositories (e.g. [Credentials in Registry](https://attack.mitre.org/techniques/T1552/002)),  or other specialized files/artifacts (e.g. [Private Keys](https://attack.mitre.org/techniques/T1552/004)).(Citation: Brining MimiKatz to Unix)",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows",
+                "Containers",
+                "IaaS",
+                "SaaS",
+                "Office Suite",
+                "Identity Provider",
+                "Azure AD",
+                "Office 365",
+                "Google Workspace"
+            ],
+            "x_mitre_detection": "While detecting adversaries accessing credentials may be difficult without knowing they exist in the environment, it may be possible to detect adversary use of credentials they have obtained. Monitor the command-line arguments of executing processes for suspicious words or regular expressions that may indicate searching for a password (for example: password, pwd, login, secure, or credentials). See [Valid Accounts](https://attack.mitre.org/techniques/T1078) for more information.\n\nMonitor for suspicious file access activity, specifically indications that a process is reading multiple files in a short amount of time and/or using command-line arguments  indicative of searching for credential material (ex: regex patterns). These may be indicators of automated/scripted credential access behavior.\n\nMonitoring when the user's <code>.bash_history</code> is read can help alert to suspicious activity. While users do typically rely on their history of commands, they often access this history through other utilities like \"history\" instead of commands like <code>cat ~/.bash_history</code>.\n\nAdditionally, monitor processes for applications that can be used to query the Registry, such as [Reg](https://attack.mitre.org/software/S0075), and collect command parameters that may indicate credentials are being searched. Correlate activity with related suspicious behavior that may indicate an active intrusion to reduce false positives.",
+            "x_mitre_id": "T1552",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "credential-access",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1552",
+                    "external_id": "T1552"
+                },
+                {
+                    "source_name": "Brining MimiKatz to Unix",
+                    "description": "Tim Wadhwa-Brown. (2018, November). Where 2 worlds collide Bringing Mimikatz et al to UNIX. Retrieved October 13, 2021.",
+                    "url": "https://labs.portcullis.co.uk/download/eu-18-Wadhwa-Brown-Where-2-worlds-collide-Bringing-Mimikatz-et-al-to-UNIX.pdf"
+                }
+            ],
+            "x_opencti_id": "742a232e-f2ea-4ca1-8a6f-d1c457798d83",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "attack-pattern--a7de922a-140f-5f1f-8204-60a83d6f65d9",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2018-04-18T17:59:24.739Z",
+            "modified": "2024-11-25T07:50:36.115Z",
+            "name": "Remote Access Software",
+            "description": "An adversary may use legitimate desktop support and remote access software to establish an interactive command and control channel to target systems within networks. These services, such as `VNC`, `Team Viewer`, `AnyDesk`, `ScreenConnect`, `LogMein`, `AmmyyAdmin`, and other remote monitoring and management (RMM) tools, are commonly used as legitimate technical support software and may be allowed by application control within a target environment.(Citation: Symantec Living off the Land)(Citation: CrowdStrike 2015 Global Threat Report)(Citation: CrySyS Blog TeamSpy)\n\nRemote access software may be installed and used post-compromise as an alternate communications channel for redundant access or as a way to establish an interactive remote desktop session with the target system. They may also be used as a component of malware to establish a reverse connection or back-connect to a service or adversary-controlled system.\n \nAdversaries may similarly abuse response features included in EDR and other defensive tools that enable remote access.\n\nInstallation of many remote access software may also include persistence (e.g., the software's installation routine creates a [Windows Service](https://attack.mitre.org/techniques/T1543/003)). Remote access modules/features may also exist as part of otherwise existing software (e.g., Google Chrome\u2019s Remote Desktop).(Citation: Google Chrome Remote Desktop)(Citation: Chrome Remote Desktop)",
+            "x_mitre_platforms": [
+                "macos",
+                "linux",
+                "windows"
+            ],
+            "x_mitre_detection": "Monitor for applications and processes related to remote admin tools. Correlate activity with other suspicious behavior that may reduce false positives if these tools are used by legitimate users and administrators.\n\nAnalyze network data for uncommon data flows (e.g., a client sending significantly more data than it receives from a server). Processes utilizing the network that do not normally have network communication or have never been seen before are suspicious. Analyze packet contents to detect application layer protocols that do not follow the expected protocol for the port that is being used.\n\n[Domain Fronting](https://attack.mitre.org/techniques/T1090/004) may be used in conjunction to avoid defenses. Adversaries will likely need to deploy and/or install these remote tools to compromised systems. It may be possible to detect or prevent the installation of these tools with host-based solutions.",
+            "x_mitre_id": "T1219",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "mitre-attack",
+                    "phase_name": "command-and-control",
+                    "x_opencti_order": 0
+                }
+            ],
+            "external_references": [
+                {
+                    "source_name": "Symantec Living off the Land",
+                    "description": "Wueest, C., Anand, H. (2017, July). Living off the land and fileless attack techniques. Retrieved April 10, 2018.",
+                    "url": "https://www.symantec.com/content/dam/symantec/docs/security-center/white-papers/istr-living-off-the-land-and-fileless-attack-techniques-en.pdf"
+                },
+                {
+                    "source_name": "Chrome Remote Desktop",
+                    "description": "Huntress. (n.d.). Retrieved March 14, 2024.",
+                    "url": "https://www.huntress.com/blog/slashandgrab-screen-connect-post-exploitation-in-the-wild-cve-2024-1709-cve-2024-1708"
+                },
+                {
+                    "source_name": "Google Chrome Remote Desktop",
+                    "description": "Google. (n.d.). Retrieved March 14, 2024.",
+                    "url": "https://support.google.com/chrome/answer/1649523"
+                },
+                {
+                    "source_name": "CrySyS Blog TeamSpy",
+                    "description": "CrySyS Lab. (2013, March 20). TeamSpy \u2013 Obshie manevri. Ispolzovat\u2019 tolko s razreshenija S-a. Retrieved April 11, 2018.",
+                    "url": "https://blog.crysys.hu/2013/03/teamspy/"
+                },
+                {
+                    "source_name": "CrowdStrike 2015 Global Threat Report",
+                    "description": "CrowdStrike Intelligence. (2016). 2015 Global Threat Report. Retrieved April 11, 2018.",
+                    "url": "https://go.crowdstrike.com/rs/281-OBQ-266/images/15GlobalThreatReport.pdf"
+                },
+                {
+                    "source_name": "mitre-attack",
+                    "url": "https://attack.mitre.org/techniques/T1219",
+                    "external_id": "T1219"
+                }
+            ],
+            "x_opencti_id": "9a6076ae-ebb4-41bc-8f0b-6ee466f3fca6",
+            "x_opencti_type": "Attack-Pattern",
+            "type": "attack-pattern",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+                "marking-definition--934134c7-9679-56d5-a8c9-4fb76064a41a"
+            ]
+        },
+        {
+            "id": "vulnerability--efdeafaa-79fd-5596-834d-5e9ac378cf2d",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2024-08-21T00:00:00.000Z",
+            "modified": "2024-11-25T07:50:33.964Z",
+            "name": "CVE-2022-0185",
+            "description": "A heap-based buffer overflow flaw was found in the way the legacy_parse_param function in the Filesystem Context functionality of the Linux kernel verified the supplied parameters length. An unprivileged (in case of unprivileged user namespaces enabled, otherwise needs namespaced CAP_SYS_ADMIN privilege) local user able to open a filesystem that does not support the Filesystem Context API (and thus fallbacks to legacy handling) could use this flaw to escalate their privileges on the system.",
+            "x_opencti_cvss_base_score": 8.4,
+            "x_opencti_cvss_base_severity": "HIGH",
+            "x_opencti_cvss_attack_vector": "LOCAL",
+            "x_opencti_cvss_integrity_impact": "HIGH",
+            "x_opencti_cvss_availability_impact": "HIGH",
+            "x_opencti_cvss_confidentiality_impact": "HIGH",
+            "x_opencti_cisa_kev": true,
+            "external_references": [
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://www.willsroot.io/2022/01/cve-2022-0185.html"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://www.openwall.com/lists/oss-security/2022/01/18/7"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://security.netapp.com/advisory/ntap-20220225-0003/"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://github.com/Crusaders-of-Rust/CVE-2022-0185"
+                },
+                {
+                    "source_name": "secalert@redhat.com",
+                    "url": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=722d94847de2"
+                },
+                {
+                    "source_name": "NIST NVD",
+                    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0185",
+                    "external_id": "CVE-2022-0185"
+                }
+            ],
+            "x_opencti_id": "9aadbc5b-5df2-42f2-be59-8328ab91100f",
+            "x_opencti_type": "Vulnerability",
+            "type": "vulnerability",
+            "created_by_ref": "identity--f11b0831-e7e6-5214-9431-ccf054e53e94",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9"
+            ]
+        },
+        {
+            "id": "identity--8cb00c79-ab20-5ed4-b37d-337241b96a29",
+            "spec_version": "2.1",
+            "identity_class": "organization",
+            "name": "Filigran",
+            "description": "Filigran is a cybertech founded in 2022, providing cyber threat intelligence, adversary simulation and crisis management solutions to cybersecurity teams across the world.",
+            "created": "2023-11-19T00:56:33.387Z",
+            "modified": "2024-11-21T19:32:46.254Z",
+            "x_opencti_organization_type": "vendor",
+            "x_opencti_id": "341257e9-3f41-4b8f-8522-4f5268f9436d",
+            "x_opencti_type": "Organization",
+            "type": "identity"
+        },
+        {
+            "id": "location--d0e7f9bc-8f87-59f9-9b28-a84c1ef2f80f",
+            "spec_version": "2.1",
+            "revoked": false,
+            "confidence": 100,
+            "created": "2023-11-19T00:56:37.062Z",
+            "modified": "2024-11-25T07:50:33.762Z",
+            "name": "Switzerland",
+            "latitude": 46.818188,
+            "longitude": 8.227512,
+            "x_opencti_aliases": [
+                "CHE",
+                "CH"
+            ],
+            "x_opencti_location_type": "Country",
+            "country": "Switzerland",
+            "x_opencti_id": "4dafb3f2-a48b-4cf9-b8ca-c43d9efa3699",
+            "x_opencti_type": "Country",
+            "type": "location",
+            "created_by_ref": "identity--8cb00c79-ab20-5ed4-b37d-337241b96a29",
+            "object_marking_refs": [
+                "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9"
+            ]
+        }
+    ]
+}

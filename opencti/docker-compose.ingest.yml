@@ -1,0 +1,142 @@
+services:
+  connector-urlscan:
+    image: opencti/connector-urlscan:${OPENCTI_VERSION} 
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${URLSCANIO_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${URLSCAN_ID_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - CONNECTOR_NAME=Urlscan
+      - CONNECTOR_SCOPE=urlscan
+      - CONNECTOR_LOG_LEVEL=error
+      - CONNECTOR_CONFIDENCE_LEVEL=40 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_CREATE_INDICATORS=true
+      - CONNECTOR_TLP=white
+      - CONNECTOR_LABELS=Phishing,Phishfeed
+      - CONNECTOR_INTERVAL=86400 # seconds, 1d
+      - URLSCAN_URL=https://urlscan.io/api/v1/pro/phishfeed?format=json&q=date:>now-1d
+      - URLSCAN_API_KEY=${URLSCAN_API_KEY}
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-urlhaus:
+    image: opencti/connector-urlhaus:${OPENCTI_VERSION} 
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${URLHAUS_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${URLHAUS_ID_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - "CONNECTOR_NAME=Abuse.ch URLhaus"
+      - CONNECTOR_SCOPE=urlhaus
+      - CONNECTOR_CONFIDENCE_LEVEL=40 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_LOG_LEVEL=error
+      - URLHAUS_CSV_URL=https://urlhaus.abuse.ch/downloads/csv_recent/
+      - URLHAUS_IMPORT_OFFLINE=true
+      - URLHAUS_THREATS_FROM_LABELS=true
+      - URLHAUS_INTERVAL=2 # In days, must be strictly greater than 1 0.04
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-abuse-ssl:
+    image: opencti/connector-abuse-ssl:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${ABUSE_SSL_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${ABUSE_SSL_ID_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - "CONNECTOR_NAME=Abuse.ch SSL Blacklist"
+      - CONNECTOR_SCOPE=abusessl
+      - CONNECTOR_CONFIDENCE_LEVEL=70
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_LOG_LEVEL=error
+      - ABUSESSL_URL=https://sslbl.abuse.ch/blacklist/sslipblacklist.csv
+      - ABUSESSL_INTERVAL=960 # Time to wait in minutes between subsequent requests
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-malwarebazaar-recent-additions:
+    image: opencti/connector-malwarebazaar-recent-additions:${OPENCTI_VERSION}  
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${MALWAREBAZAAR_RECENT_ADDITIONS_ID_CONNECTOR}
+      - CONNECTOR_ID=${MALWAREBAZAAR_RECENT_ADDITIONS_TOKEN_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - "CONNECTOR_NAME=MalwareBazaar Recent Additions"
+      - CONNECTOR_CONFIDENCE_LEVEL=50 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_CREATE_INDICATOR=true
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_LOG_LEVEL=error
+      - MALWAREBAZAAR_RECENT_ADDITIONS_API_URL=https://mb-api.abuse.ch/api/v1/
+      - MALWAREBAZAAR_RECENT_ADDITIONS_COOLDOWN_SECONDS=360 # Time to wait in seconds between subsequent requests
+      - MALWAREBAZAAR_RECENT_ADDITIONS_INCLUDE_TAGS=exe,dll,docm,docx,doc,xls,xlsx,xlsm,js # (Optional) Only download files if any tag matches. (Comma separated)
+      - MALWAREBAZAAR_RECENT_ADDITIONS_INCLUDE_REPORTERS= # (Optional) Only download files uploaded by these reporters. (Comma separated)
+      - MALWAREBAZAAR_RECENT_ADDITIONS_LABELS=malware-bazar # (Optional) Labels to apply to uploaded Artifacts. (Comma separated)
+      - MALWAREBAZAAR_RECENT_ADDITIONS_LABELS_COLOR=#54483b # Color to use for labels
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-threatfox:
+    image: opencti/connector-threatfox:${OPENCTI_VERSION} 
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${THREATFOX_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${THREATFOX_ID_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - "CONNECTOR_NAME=Abuse.ch | Threat Fox"
+      - CONNECTOR_SCOPE=ThreatFox
+      - CONNECTOR_CONFIDENCE_LEVEL=40 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_LOG_LEVEL=error
+      - THREATFOX_CSV_URL=https://threatfox.abuse.ch/export/csv/recent/
+      # - THREATFOX_CSV_URL=https://threatfox.abuse.ch/export/json/recent/
+      - THREATFOX_IMPORT_OFFLINE=true
+      - THREATFOX_CREATE_INDICATORS=true
+      - THREATFOX_THREATS_FROM_LABELS=true
+      - THREATFOX_INTERVAL=2 # In days, must be strictly greater than 1 0.04
+      - THREATFOX_IOC_TO_IMPORT=all_types, ip:port, domain, url, md5_hash, sha1_hash, sha256_hash # List of IOC types to import possiblities: ip:port,domain,url,md5_hash,sha1_hash,sha256_hash default: ip:port,domain,url
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-ransomware:
+    image: ransomware-live-custom-5:custom
+    environment:
+      # Connector's definition parameters:
+      - CONNECTOR_NAME=Ransomware Connector
+      - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,intrusion-set,malware,tool,report
+      # Connector's generic execution parameters:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${RANSOMWARELIVE_TOKEN_CONNECTOR} #generate user token
+      - CONNECTOR_ID=${RANSOMWARELIVE_ID_CONNECTOR} #Valid UUIDv4 tokem
+      - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted).
+      - CONNECTOR_LOG_LEVEL=debug # Log level: debug, info, warn, error
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_PULL_HISTORY=true # If true, the connector will pull the history of the daa. But it is not recommended to set it to true as there will a large influx of data.
+      - CONNECTOR_HISTORY_START_YEAR=2024 # Data only goes back till 2020
+      - CONNECTOR_RUN_EVERY=60m # 10 minutes will be the ideal time
+      # Connector's custom execution parameters:
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+networks:
+  opencti-network:
+    driver: bridge

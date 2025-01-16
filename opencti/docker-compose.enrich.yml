@@ -1,0 +1,440 @@
+services:
+  connector-dnstwist:
+    image: opencti/connector-dnstwist:${OPENCTI_VERSION}
+    environment:
+      - CONNECTOR_NAME=DNS_TWISTER
+      - CONNECTOR_SCOPE=Domain-Name
+      # Connector's generic execution parameters:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${DNSTWISTER_TOKEN_CONNECTOR} ## connector token
+      - CONNECTOR_ID=${DNSTWISTER_ID_CONNECTOR} # UUID of the connector
+      - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted).
+      - CONNECTOR_LOG_LEVEL=debug
+      - CONNECTOR_AUTO=false # don't run the connector automatically, you will flood your opencti instance
+      - CONNECTOR_FETCH_REGISTERED=true # takes true or false; gives the ability to control the dnstwister domain selection
+      - CONNECTOR_DNS_TWIST_THREADS=80 #number of threads to use for dnstwist; default is 20
+      - CONNECTOR_UPDATE_EXISTING_DATA=true
+      # Connector's custom execution parameters:
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-google-dns:
+    image: opencti/connector-google-dns:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${GOOGLE_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${GOOGLE_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=Google DNS
+      - CONNECTOR_SCOPE=Domain-Name,Hostname # MIME type or Stix Object
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-google-safebrowsing:
+    image: opencti/connector-google-safebrowsing:${OPENCTI_VERSION}
+    environment:
+      # Connector's definition parameters:
+      - CONNECTOR_NAME=Google Safe Browsing
+      - CONNECTOR_SCOPE=Url,Domain-Name,Hostname
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      # Connector's generic execution parameters:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${SAFEBROWSING_TOKEN_CONNECTOR} # Your Connector's token
+      - CONNECTOR_ID=${GOOGLE_SAFEBROWSING_ID_CONNECTOR} # Your connector UUID
+      - CONNECTOR_LOG_LEVEL=info 
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_UPDATE_EXISTING_DATA=true
+      # Connector's custom execution parameters:
+      - GOOGLE_SAFE_BROWSING_API_KEY=${SAFEBROWSING_API_TOKEN} # Your Google Safe Browsing API key
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-greynoise:
+    image: opencti/connector-greynoise:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${GREYNOISE_CONNECTOR_TOKEN}
+      - CONNECTOR_ID=${GREYNOISE_CONNECTOR_ID}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=GreyNoise
+      - CONNECTOR_SCOPE=IPv4-Addr
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_CONFIDENCE_LEVEL=60 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - GREYNOISE_KEY=${CONNECTOR_GREYNOISE_APIKEY}
+      - GREYNOISE_MAX_TLP=TLP:AMBER
+      - "GREYNOISE_NAME=GreyNoise sensors"
+      - "GREYNOISE_DESCRIPTION=GreyNoise collects and analyzes untargeted, widespread, and opportunistic scan and attack activity that reaches every server directly connected to the Internet."
+      - GREYNOISE_SIGHTING_NOT_SEEN=false
+      - GREYNOISE_SPOOFABLE_CONFIDENCE_LEVEL=30
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-hygiene:
+    image: opencti/connector-hygiene:${OPENCTI_VERSION} 
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${HYGIENE_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${HYGIENE_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=Hygiene
+      - CONNECTOR_SCOPE=IPv4-Addr,IPv6-Addr,Domain-Name,StixFile,Artifact
+      - CONNECTOR_AUTO=true
+      - CONNECTOR_CONFIDENCE_LEVEL=15 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - HYGIENE_WARNINGLISTS_SLOW_SEARCH=false # Enable warning lists slow search mode
+      - HYGIENE_ENRICH_SUBDOMAINS=true # Enrich subdomains with hygiene_parent label if the parents are found in warninglists
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-hostio:
+    image: opencti/connector-hostio:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${HOSTIO_TOKEN_CONNECTOR}
+      # Connector's definition parameters:
+      - CONNECTOR_NAME=hostio
+      - CONNECTOR_SCOPE=IPv4-Addr,Domain-Name,IPv6-Addr
+      - CONNECTOR_ID=${HOSTIO_ID_CONNECTOR}
+      - CONNECTOR_CONFIDENCE_LEVEL=70 # From 0 (Unknown) to 100 (Fully trusted).
+      - CONNECTOR_LOG_LEVEL=error
+      # HostIO-Specific Parameters:
+      - HOSTIO_TOKEN=${IPINFO_HOSTIO_APP_TOKEN}  # Token for HostIO or IPInfo API.
+      - HOSTIO_LIMIT=5  # Limit for returned results, update to match the page limit for your subscription (default 5 for Free subscription).
+      - HOSTIO_LABELS=hostio,osint  # Comma-separated list of labels to add to the entities. e.g., "hostio,osint"
+      - HOSTIO_MARKING_REFS=TLP:WHITE  # TLP Marking Reference e.g., TLP:WHITE, TLP:GREEN, TLP:AMBER, TLP:RED
+      - HOSTIO_TLP_MAX=TLP:AMBER  # Maximum TLP level to process, e.g., TLP:WHITE, TLP:GREEN, TLP:AMBER, TLP:RED
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-ipinfo:
+    image: opencti/connector-ipinfo:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${IPINFO_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${IPINFO_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=IpInfo
+      - CONNECTOR_SCOPE=IPv4-Addr
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_CONFIDENCE_LEVEL=70 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - IPINFO_TOKEN=${IPINFO_HOSTIO_APP_TOKEN}
+      - IPINFO_MAX_TLP=TLP:AMBER
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-joe-sandbox:
+    image: opencti/connector-joe-sandbox:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${JOE_SANDBOX_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${JOE_SANDBOX_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - "CONNECTOR_NAME=Joe Sandbox"
+      - CONNECTOR_SCOPE=Artifact,Url
+      - CONNECTOR_AUTO=false # Enable/disable auto-enrichment of observables
+      - CONNECTOR_CONFIDENCE_LEVEL=50 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      # Download/upload as external ref files for these report types
+      # json/xml are only allowed to be used with Joe Sandbox Cloud Pro
+      - JOE_SANDBOX_REPORT_TYPES=executive,html,iochtml,iocjson,iocxml,unpackpe,stix,ida,pdf,pdfexecutive,misp,pcap,maec,memdumps,json,lightjsonfixed,xml,lightxml,pcapunified,pcapsslinspection
+      # Cloud Pro: https://jbxcloud.joesecurity.org/api
+      # Cloud Basic: https://joesandbox.com/api
+      - JOE_SANDBOX_API_URL=https://jbxcloud.joesecurity.org/api
+      - JOE_SANDBOX_API_KEY=${JOE_SANDBOX_API_KEY}
+      # Cloud Pro: https://jbxcloud.joesecurity.org/analysis
+      # Cloud Basic: https://joesandbox.com/analysis
+      - JOE_SANDBOX_ANALYSIS_URL=https://jbxcloud.joesecurity.org/analysis
+      # If true you accept Terms and Conditions at https://jbxcloud.joesecurity.org/tandc
+      - JOE_SANDBOX_ACCEPT_TAC=true
+      # Time in seconds to timeout after calling Joe Sandbox API
+      - JOE_SANDBOX_API_TIMEOUT=30
+      # Verify SSL for API calls
+      - JOE_SANDBOX_VERIFY_SSL=true
+      # How many times to retry API calls before giving up
+      - JOE_SANDBOX_API_RETRIES=5
+      # A JSON encoded map of proxies to use for API calls
+      # See https://requests.readthedocs.io/en/latest/user/advanced/?highlight=proxy#proxies
+      - JOE_SANDBOX_PROXIES=
+      # The user agent. Use this when you write an integration with Joe Sandbox
+      # so that it is possible to track how often an integration is being used.
+      - JOE_SANDBOX_USER_AGENT=OpenCTI
+      # Analysis systems to use (comma separated if multiple)
+      - JOE_SANDBOX_SYSTEMS=w10x64_office
+      # Timeout for the analysis
+      - JOE_SANDBOX_ANALYSIS_TIME=300
+      # Enable full internet access in the analysis (must be false if internet simulation is true)
+      - JOE_SANDBOX_INTERNET_ACCESS=true
+      # Enable internet simulation (must be false if internet access is true)
+      - JOE_SANDBOX_INTERNET_SIMULATION=false
+      # Enable Hybrid Code Analysis (HCA).
+      - JOE_SANDBOX_HYBRID_CODE_ANALYSIS=true
+      # Enable Hybrid Decompilation (DEC).
+      - JOE_SANDBOX_HYBRID_DECOMPILATION=true
+      # Enable the report cache. Check the cache for existing reports before running a full analysis.
+      - JOE_SANDBOX_REPORT_CACHE=false
+      # Perform APK DEX code instrumentation.
+      - JOE_SANDBOX_APK_INSTRUMENTATION=true
+      # Perform generic unpacking using the Microsoft Antimalware Scan Interface (AMSI).# Perform generic unpacking using the Microsoft Antimalware Scan Interface (AMSI).
+      - JOE_SANDBOX_AMSI_UNPACKING=true
+      # Enable HTTPS inspection.
+      - JOE_SANDBOX_SSL_INSPECTION=true
+      # Enable VBA instrumentation (two analyses are performed)
+      - JOE_SANDBOX_VBA_INSTRUMENTATION=false
+      # Enable Javascript instrumentation (two analyses are performed)
+      - JOE_SANDBOX_JS_INSTRUMENTATION=false
+      # Enable JAVA JAR tracing (two analyses are performed)
+      - JOE_SANDBOX_JAVA_JAR_TRACING=false
+      # Enable .NET tracing (two analyses are performed)
+      - JOE_SANDBOX_DOTNET_TRACING=false
+      # Starts the Sample with normal user privileges
+      - JOE_SANDBOX_START_AS_NORMAL_USER=false
+      # Change the analyzer’s system date (helpful for date-aware samples), format is: YYYY-MM-DD
+      - JOE_SANDBOX_SYSTEM_DATE=
+      # Changes the language and locale of the analysis machine
+      - JOE_SANDBOX_LANGUAGE_AND_LOCALE=
+      # Select the country to use for routing internet access through.
+      - JOE_SANDBOX_LOCALIZED_INTERNET_COUNTRY=
+      - JOE_SANDBOX_EMAIL_NOTIFICATION=false
+      # Do not unpack archives (zip, 7z etc) containing multiple files.
+      - JOE_SANDBOX_ARCHIVE_NO_UNPACK=false
+      # Enable Hypervisor based Inspection
+      - JOE_SANDBOX_HYPERVISOR_BASED_INSPECTION=false
+      # Fast Mode focuses on fast analysis and detection versus deep forensic analysis.
+      - JOE_SANDBOX_FAST_MODE=false
+      # Enables secondary results such as Yara rule generation, classification via Joe Sandbox Class as well as several detail reports. Analysis will run faster with disabled secondary results
+      - JOE_SANDBOX_SECONDARY_RESULTS=true
+      # Path to a cookbook to run for the analysis
+      - JOE_SANDBOX_COOKBOOK_FILE_PATH=
+      # Password for decrypting documents like MS Office and PDFs
+      - JOE_SANDBOX_DOCUMENT_PASSWORD=1234
+      # This password will be used to decrypt archives (zip, 7z, rar etc.).
+      - JOE_SANDBOX_ARCHIVE_PASSWORD=infected
+      # Will start the sample with the given command-line argument. Currently only available on Windows analyzers.
+      - JOE_SANDBOX_COMMAND_LINE_ARGUMENT=
+      # If this is used, the sample will not be started automatically!
+      - JOE_SANDBOX_LIVE_INTERACTION=false
+      # Encryption password for analyses, AES-256 is used to encrypt files and the password is deleted on the backend after encrypting files
+      - JOE_SANDBOX_ENCRYPT_WITH_PASSWORD=
+      # Use a browser for analysis of URLs, false == download/execute
+      - JOE_SANDBOX_BROWSER=false
+      # Lookup the reputation of URLs and domains to improve the analysis. This option will send URLs and domains to third party services and WHOIS servers!
+      - JOE_SANDBOX_URL_REPUTATION=false
+      # Export the report(s) from this analysis to Joe Sandbox View.
+      - JOE_SANDBOX_EXPORT_TO_JBXVIEW=false
+      # Delete the analysis after X days. If not set, the default value is used
+      - JOE_SANDBOX_DELETE_AFTER_DAYS=30
+      ## ON PREMISE EXCLUSIVE PARAMETER, set the priority of the submission between 1 and 10, high value means higher priority
+      - JOE_SANDBOX_PRIORITY=
+      # The default TLP for newly created stix objects
+      - JOE_SANDBOX_DEFAULT_TLP=TLP:CLEAR
+      # The color for yara labels applied to the observable
+      - JOE_SANDBOX_YARA_COLOR=#0059f7
+      # The color for default labels
+      - JOE_SANDBOX_DEFAULT_COLOR=#54483b
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-riskiq-passive-total:
+    image: opencti/connector-riskiq-passive-total:${OPENCTI_VERSION}
+    environment:
+      # Connector's generic execution parameters
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${RISKIQ_PASSIVETOTAL_TOKEN_CONNECTOR}
+      # Connector's definition parameters REQUIRED
+      - CONNECTOR_ID=${RISKIQ_PASSIVETOTAL_ID_CONNECTOR}
+      - "CONNECTOR_NAME=RiskIQ PassiveTotal"
+      - CONNECTOR_SCOPE=domain, ipv4-address, indicator
+      - CONNECTOR_LOG_LEVEL=info
+      - CONNECTOR_AUTO=true
+
+      # Connector's custom execution parameters
+      - RISKIQ_USERNAME=${RISKIQ_USERNAME}
+      - RISKIQ_API_KEY=${RISKIQ_API_KEY}
+      - RISKIQ_MAX_TLP=TLP:AMBER # Available values: TLP:CLEAR, TLP:WHITE, TLP:GREEN, TLP:AMBER, TLP:AMBER+STRICT, TLP:RED
+      - RISKIQ_IMPORT_LAST_SEEN_TIME_WINDOW=P30D # Default P30D
+      # Add proxy parameters below if needed
+      # - HTTP_PROXY=CHANGEME
+      # - HTTPS_PROXY=CHANGEME
+      # - NO_PROXY=CHANGEME
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-shodan-internetdb:
+    image: opencti/connector-shodan-internetdb:${OPENCTI_VERSION}  
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${SHODAN_INTERNETDB_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${SHODAN_INTERNETDB_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=Shodan InternetDB
+      - CONNECTOR_SCOPE=IPv4-Addr
+      - CONNECTOR_CONFIDENCE_LEVEL=75
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_LOG_LEVEL=error
+      - SHODAN_MAX_TLP=white
+      - SHODAN_SSL_VERIFY=true
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-shodan:
+    image: opencti/connector-shodan:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${SHODAN_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${SHODAN_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=Shodan
+      - CONNECTOR_SCOPE=IPv4-Addr
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_CONFIDENCE_LEVEL=75 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - SHODAN_TOKEN=${SHOADAN_API_KEY}
+      - SHODAN_MAX_TLP=TLP:AMBER
+      - SHODAN_CREATE_INDICATORS=true
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-urlscan-enrichment:
+    image: opencti/connector-urlscan-enrichment:${OPENCTI_VERSION}
+    environment:
+      # OpenCTI's generic execution parameters:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${URLSCANIO_ENRICH_TOKEN_CONNECTOR}
+      # Connector's generic execution parameters:
+      - CONNECTOR_ID=${URLSCANIO_ENRICH_ID_CONNECTOR}
+      - CONNECTOR_NAME=Urlscan
+      - CONNECTOR_SCOPE=url,ipv4-addr,ipv6-addr
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_LOG_LEVEL=error
+      # Connector's custom execution parameters:
+      - URLSCAN_ENRICHMENT_API_KEY=${URLSCAN_API_KEY}
+      - URLSCAN_ENRICHMENT_API_BASE_URL=https://urlscan.io/api/v1/
+      - URLSCAN_ENRICHMENT_IMPORT_SCREENSHOT=true
+      - URLSCAN_ENRICHMENT_VISIBILITY=public # Available values : public, unlisted, private
+      - URLSCAN_ENRICHMENT_SEARCH_FILTERED_BY_DATE=>now-1y # Available : ">now-1h", ">now-1d", ">now-1y", "[2022 TO 2023]", "[2022/01/01 TO 2023/12/01]"
+      - URLSCAN_ENRICHMENT_MAX_TLP=TLP:AMBER # Required, Available values: TLP:CLEAR, TLP:WHITE, TLP:GREEN, TLP:AMBER, TLP:AMBER+STRICT, TLP:RED
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+
+  connector-yara:
+    image: opencti/connector-yara:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${YARA_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${YARA_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=YARA
+      - CONNECTOR_SCOPE=Artifact # MIME type or Stix Object
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-virustotal:
+    image: opencti/connector-virustotal:${OPENCTI_VERSION}       
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${VIRUS_TOTAL_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${VIRUS_TOTAL_ID_CONNECTOR}
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_NAME=VirusTotal
+      - CONNECTOR_SCOPE=StixFile,Artifact,IPv4-Addr,Domain-Name,Url
+      - CONNECTOR_AUTO=false # Enable/disable auto-enrichment of observables
+      - CONNECTOR_CONFIDENCE_LEVEL=50 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - VIRUSTOTAL_TOKEN=${VIRUS_TOTAL_API_KEY}
+      - VIRUSTOTAL_MAX_TLP=TLP:AMBER
+      - VIRUSTOTAL_REPLACE_WITH_LOWER_SCORE=false # Whether to keep the higher of the VT or existing score (false) or force the score to be updated with the VT score even if its lower than existing score (true).
+      # File/Artifact specific config settings
+      - VIRUSTOTAL_FILE_CREATE_NOTE_FULL_REPORT=true # Whether or not to include the full report as a Note
+      - VIRUSTOTAL_FILE_UPLOAD_UNSEEN_ARTIFACTS=false # Whether to upload artifacts (smaller than 32MB) that VirusTotal has no record of
+      - VIRUSTOTAL_FILE_INDICATOR_CREATE_POSITIVES=10 # Create an indicator for File/Artifact based observables once this positive theshold is reached. Note: specify 0 to disable indicator creation
+      - VIRUSTOTAL_FILE_INDICATOR_VALID_MINUTES=2880 # How long the indicator is valid for in minutes
+      - VIRUSTOTAL_FILE_INDICATOR_DETECT=true # Whether or not to set detection for the indicator to true
+      # IP specific config settings
+      - VIRUSTOTAL_IP_INDICATOR_CREATE_POSITIVES=10 # Create an indicator for IPv4 based observables once this positive theshold is reached. Note: specify 0 to disable indicator creation
+      - VIRUSTOTAL_IP_INDICATOR_VALID_MINUTES=2880 # How long the indicator is valid for in minutes
+      - VIRUSTOTAL_IP_INDICATOR_DETECT=true # Whether or not to set detection for the indicator to true
+      - VIRUSTOTAL_IP_ADD_RELATIONSHIPS=true # Whether or not to add ASN and location resolution relationships
+      # Domain specific config settings
+      - VIRUSTOTAL_DOMAIN_INDICATOR_CREATE_POSITIVES=10 # Create an indicator for Domain based observables once this positive theshold is reached. Note: specify 0 to disable indicator creation
+      - VIRUSTOTAL_DOMAIN_INDICATOR_VALID_MINUTES=2880 # How long the indicator is valid for in minutes
+      - VIRUSTOTAL_DOMAIN_INDICATOR_DETECT=true # Whether or not to set detection for the indicator to true
+      - VIRUSTOTAL_DOMAIN_ADD_RELATIONSHIPS=true # Whether or not to add IP resolution relationships
+      # URL specific config settings
+      - VIRUSTOTAL_URL_UPLOAD_UNSEEN=false # Whether to upload URLs that VirusTotal has no record of for analysis
+      - VIRUSTOTAL_URL_INDICATOR_CREATE_POSITIVES=10 # Create an indicator for Url based observables once this positive theshold is reached. Note: specify 0 to disable indicator creation
+      - VIRUSTOTAL_URL_INDICATOR_VALID_MINUTES=2880 # How long the indicator is valid for in minutes
+      - VIRUSTOTAL_URL_INDICATOR_DETECT=true # Whether or not to set detection for the indicator to true
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+    deploy:
+      mode: replicated
+      replicas: 1
+
+networks:
+  opencti-network:
+    driver: bridge

@@ -1,0 +1,91 @@
+services:
+  connector-alienvault:
+    image: opencti/connector-alienvault:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${ALIENVAULT_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${ALIENVAULT_ID_CONNECTOR}
+      - CONNECTOR_NAME=AlienVault
+      - CONNECTOR_SCOPE=alienvault
+      - CONNECTOR_LOG_LEVEL=error
+      - CONNECTOR_DURATION_PERIOD=PT30M # In ISO8601 Format starting with "P" for Period ex: "PT30M" = Period time of 30 minutes
+      - ALIENVAULT_BASE_URL=https://otx.alienvault.com
+      - ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY}
+      - ALIENVAULT_TLP=White
+      - ALIENVAULT_CREATE_OBSERVABLES=true
+      - ALIENVAULT_CREATE_INDICATORS=true
+      - ALIENVAULT_PULSE_START_TIMESTAMP=2023-01-01T00:00:00                  # BEWARE! Could be a lot of pulses!
+      - ALIENVAULT_REPORT_TYPE=threat-report
+      - ALIENVAULT_REPORT_STATUS=New
+      - ALIENVAULT_GUESS_MALWARE=true                                         # Use tags to guess malware.
+      - ALIENVAULT_GUESS_CVE=true                                             # Use tags to guess CVE.
+      - ALIENVAULT_EXCLUDED_PULSE_INDICATOR_TYPES=FileHash-MD5,FileHash-SHA1  # Excluded Pulse indicator types.
+      - ALIENVAULT_ENABLE_RELATIONSHIPS=true                                  # Enable/Disable relationship creation between SDOs.
+      - ALIENVAULT_ENABLE_ATTACK_PATTERNS_INDICATES=true                      # Enable/Disable "indicates" relationships between indicators and attack patterns
+      - ALIENVAULT_INTERVAL_SEC=1800
+      - ALIENVAULT_FILTER_INDICATORS=true
+      - ALIENVAULT_DEFAULT_X_OPENCTI_SCORE=50
+      - ALIENVAULT_X_OPENCTI_SCORE_IP=60
+      - ALIENVAULT_X_OPENCTI_SCORE_DOMAIN=70
+      - ALIENVAULT_X_OPENCTI_SCORE_HOSTNAME=75
+      - ALIENVAULT_X_OPENCTI_SCORE_EMAIL=70
+      - ALIENVAULT_X_OPENCTI_SCORE_FILE=85
+      - ALIENVAULT_X_OPENCTI_SCORE_URL=80
+      - ALIENVAULT_X_OPENCTI_SCORE_MUTEX=60
+      - ALIENVAULT_X_OPENCTI_SCORE_CRYPTOCURRENCY_WALLET=80
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-malpedia:
+    image: opencti/connector-malpedia:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${MALPEDIA_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${MALPEDIA_ID_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - CONNECTOR_NAME=Malpedia
+      - CONNECTOR_SCOPE=malpedia
+      - CONNECTOR_CONFIDENCE_LEVEL=30
+      - CONNECTOR_UPDATE_EXISTING_DATA=false
+      - CONNECTOR_LOG_LEVEL=error
+      - CONNECTOR_EXPOSE_METRICS=false
+      - MALPEDIA_AUTH_KEY=
+      - MALPEDIA_INTERVAL_SEC=86400
+      - MALPEDIA_IMPORT_INTRUSION_SETS=true
+      - MALPEDIA_IMPORT_YARA=true
+      - MALPEDIA_CREATE_INDICATORS=true
+      - MALPEDIA_CREATE_OBSERVABLES=true
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+  connector-riskiq:
+    image: opencti/connector-riskiq:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${RISKIQ_TOKEN_CONNECTOR}
+      - CONNECTOR_ID=${RISKIQ_ID_CONNECTOR}
+      - CONNECTOR_TYPE=EXTERNAL_IMPORT
+      - CONNECTOR_NAME=RISKIQ
+      - CONNECTOR_SCOPE=riskiq
+      - CONNECTOR_CONFIDENCE_LEVEL=30 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - RISKIQ_BASE_URL=https://api.riskiq.net/pt/v2
+      - RISKIQ_USER=ti@f79.ch
+      - RISKIQ_PASSWORD=${RISKIQ_API_KEY}
+      - RISKIQ_CREATE_INDICATORS=true
+      - RISKIQ_INTERVAL_SEC=7200
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+networks:
+  opencti-network:
+    driver: bridge

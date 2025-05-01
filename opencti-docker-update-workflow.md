@@ -141,6 +141,7 @@ Testing:
 In DEV/testing, perform comprehensive tests (e.g., API functionality, data integrity, performance) on new minor versions.
 For production, only adopt a new minor version (e.g., 6.6.x) after it’s proven stable and a newer series (e.g., 6.7.x) is released.
 
+```plaintext
 Example File Structure
 plaintext
 project/
@@ -149,6 +150,7 @@ project/
 ├── .env.prod              # Production environment variables
 ├── connectors-compose.yml # Optional, for connectors or additional services
 ├── .env.connectors        # Optional, for additional services
+```
 
 ## Troubleshooting
 

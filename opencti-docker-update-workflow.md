@@ -111,15 +111,15 @@ docker compose -f docker-compose.yml --env-file .env.dev up -d
 # For Production
 docker compose -f docker-compose.yml --env-file .env.prod up -d
 
-Notes:
+### Notes:
 
-Data Persistence: Ensure volumes are preserved to maintain data for stateful services (Redis, Elasticsearch, MinIO). Avoid docker compose down -v unless intentionally resetting data.
+- **Data Persistence**: Ensure volumes are preserved to maintain data for stateful services (Redis, Elasticsearch, MinIO). Avoid docker compose down -v unless intentionally resetting data.
 
-Production Upgrades: For production, only upgrade to the latest patch release within the 6.5.x series (e.g., 6.5.11). Review OpenCTI release notes for compatibility, migration steps (e.g., database schema updates), or breaking changes.
+- **Production Upgrades**: For production, only upgrade to the latest patch release within the 6.5.x series (e.g., 6.5.11). Review OpenCTI release notes for compatibility, migration steps (e.g., database schema updates), or breaking changes.
 
-DEV/Testing: Test the new minor version (e.g., 6.6.8) thoroughly in DEV/testing to validate stability and functionality before considering it for production (e.g., when 6.7.x is released).
+- **DEV/Testing**: Test the new minor version (e.g., 6.6.8) thoroughly in DEV/testing to validate stability and functionality before considering it for production (e.g., when 6.7.x is released).
 
-Downtime: The down and up -d sequence causes downtime. For production, consider advanced strategies (e.g., blue-green deployment) if zero-downtime updates are required.
+- **Downtime**: The down and up -d sequence causes downtime. For production, consider advanced strategies (e.g., blue-green deployment) if zero-downtime updates are required.
 Additional Considerations
 
 Modular Setup:
@@ -141,9 +141,8 @@ Testing:
 In DEV/testing, perform comprehensive tests (e.g., API functionality, data integrity, performance) on new minor versions.
 For production, only adopt a new minor version (e.g., 6.6.x) after it’s proven stable and a newer series (e.g., 6.7.x) is released.
 
+## Example File Structure
 ```plaintext
-Example File Structure
-plaintext
 project/
 ├── docker-compose.yml      # Core OpenCTI configuration
 ├── .env.dev               # DEV/Testing environment variables

@@ -60,56 +60,71 @@ ELASTIC_STACK_VERSION=8.18.0
 RABBITMQ_VERSION=4.1-management
 MINIO_VERSION=RELEASE.2024-05-28T17-19-04Z
 ```
-Notes:
-MinIO Compatibility: If CPU compatibility issues occur, update the docker-compose.yml to use minio/minio:RELEASE.2024-05-28T17-19-04Z-cpuv1 for the MinIO service.
-Dependency Compatibility: Verify that dependency versions (Redis, Elasticsearch, RabbitMQ, MinIO) are compatible with the target OpenCTI version. For production, consider older versions (e.g., ELASTIC_STACK_VERSION=8.17.0) if required by OpenCTI 6.5.x.
-Custom Variables: Add any additional environment variables required by your setup (e.g., network settings, service configurations).
+### Notes:
 
-3. Test the Configuration
+- **MinIO Compatibility**: If CPU compatibility issues occur, update the docker-compose.yml to use minio/minio:RELEASE.2024-05-28T17-19-04Z-cpuv1 for the MinIO service.
+
+- **Dependency Compatibility**: Verify that dependency versions (Redis, Elasticsearch, RabbitMQ, MinIO) are compatible with the target OpenCTI version. For production, consider older versions (e.g., ELASTIC_STACK_VERSION=8.17.0) if required by OpenCTI 6.5.x.
+
+- **Custom Variables**: Add any additional environment variables required by your setup (e.g., network settings, service configurations).
+
+## 3. Test the Configuration
 Validate the docker-compose.yml and environment file to ensure correct syntax and variable substitution:
-bash
+
+```bash
 # For DEV/Testing
 docker compose -f docker-compose.yml --env-file .env.dev config
 
+
 # For Production
+
 docker compose -f docker-compose.yml --env-file .env.prod config
+```
 This command outputs the resolved configuration and catches errors in the YAML or environment variables.
 
-4. Pull Images
+## 4. Pull Images
 Fetch the required Docker images to ensure they are available locally:
-bash
+```bash
 # For DEV/Testing
 docker compose -f docker-compose.yml --env-file .env.dev pull
 
 # For Production
 docker compose -f docker-compose.yml --env-file .env.prod pull
 This step pre-downloads images (e.g., opencti/platform:6.6.8, redis:7.4.3) to prevent deployment errors.
-
-5. Perform a Dry Run (Optional)
+```
+## 5. Perform a Dry Run (Optional)
 Simulate the deployment to verify the setup without starting containers:
-bash
+```bash
 # For DEV/Testing
 docker compose -f docker-compose.yml --env-file .env.dev up -d --dry-run
 
 # For Production
 docker compose -f docker-compose.yml --env-file .env.prod up -d --dry-run
-The --dry-run flag ensures the configuration is valid and compatible with the environment.
-6. Deploy or Migrate
+```
+The `--dry-run` flag ensures the configuration is valid and compatible with the environment.
+
+## 6. Deploy or Migrate
 To apply the update or migrate to the new version:
-Stop and remove existing containers:
-bash
+
+- Stop and remove existing containers:
+
+```bash
 # For DEV/Testing
 docker compose -f docker-compose.yml --env-file .env.dev down
 
 # For Production
 docker compose -f docker-compose.yml --env-file .env.prod down
-Deploy the new version in detached mode:
-bash
+```
+
+- Deploy the new version in detached mode:
+
+```bash
 # For DEV/Testing
 docker compose -f docker-compose.yml --env-file .env.dev up -d
 
 # For Production
 docker compose -f docker-compose.yml --env-file .env.prod up -d
+```
 
 ### Notes:
 

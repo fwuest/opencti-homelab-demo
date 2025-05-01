@@ -52,14 +52,14 @@ Define version-specific variables in separate environment files to manage OpenCT
   RABBITMQ_VERSION=4.1-management
   MINIO_VERSION=RELEASE.2024-05-28T17-19-04Z
   ```
-- **Production** (`.env.prod`):
-```env
-OPENCTI_VERSION=6.5.11
-OPENCTI_REDIS_VERSION=7.4.3
-ELASTIC_STACK_VERSION=8.18.0
-RABBITMQ_VERSION=4.1-management
-MINIO_VERSION=RELEASE.2024-05-28T17-19-04Z
-```
+- **Production** (`.env.prod`)
+  ```env
+  OPENCTI_VERSION=6.5.11
+  OPENCTI_REDIS_VERSION=7.4.3
+  ELASTIC_STACK_VERSION=8.18.0
+  RABBITMQ_VERSION=4.1-management
+  MINIO_VERSION=RELEASE.2024-05-28T17-19-04Z
+  ```
 ### Notes:
 
 - **MinIO Compatibility**: If CPU compatibility issues occur, update the docker-compose.yml to use minio/minio:RELEASE.2024-05-28T17-19-04Z-cpuv1 for the MinIO service.

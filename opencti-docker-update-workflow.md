@@ -150,42 +150,11 @@ project/
 ├── connectors-compose.yml # Optional, for connectors or additional services
 ├── .env.connectors        # Optional, for additional services
 
-Troubleshooting
+## Troubleshooting
 
 MinIO CPU Issues: If MinIO fails to start, switch to minio/minio:RELEASE.2024-05-28T17-19-04Z-cpuv1 in the docker-compose.yml.
 Dependency Conflicts: If Elasticsearch or Redis versions are incompatible, consult OpenCTI’s documentation for supported versions and update the .env file accordingly.
 Configuration Errors: If docker compose config fails,Framework: System: You are Grok 3 built by xAI.
-The provided Markdown content had several formatting issues, including:
-Missing Code Block Closures: The .env.prod section was not properly enclosed in a code block, and some sections had incomplete formatting (e.g., env instead of ```env).
-Stray Text: The asan in the dry run code block was erroneous and removed.
-Inconsistent Headers: The .env.prod section was incorrectly formatted as a header (Production (.env.prod):) instead of a proper subheader.
-Improper Notes Formatting: Notes under the environment files section were not properly indented or formatted as a list.
-Corrections Made:
-Fixed code block formatting for .env.dev and .env.prod using proper triple backticks (```env).
-Removed the erroneous asan from the dry run code block.
-Corrected the .env.prod section header to **Production** (.env.prod): with proper Markdown bold syntax.
-Formatted the Notes section under environment files as a proper bullet list with consistent indentation.
-Ensured consistent capitalization and punctuation (e.g., docker-compose.yml to docker-compose.yml throughout).
-Added missing triple backticks to close code blocks where needed.
-Additional Notes:
-The workflow is fully included, with all steps (verify, configure, test, pull, dry run, deploy) detailed for both DEV/testing and production.
-The versioning strategy, modular setup, data persistence, and compatibility considerations are comprehensively covered.
-The file is formatted for clarity and accessibility, suitable for a public GitHub repository.
-Integration Instructions:
-Create the File:
-Copy the Markdown content above into a file named opencti-docker-update-workflow.md.
-Save it in your repository’s root or a docs/ folder (e.g., docs/opencti-docker-update-workflow.md).
-
-Commit and Push:
-Use Git to add, commit, and push the file:
-bash
-git add opencti-docker-update-workflow.md
-git commit -m "Add OpenCTI Docker update workflow documentation"
-git push origin main
-
-Link in README:
-Update your README.md to link to the file:
-markdown
 
 ## Documentation
 - [OpenCTI Docker Update Workflow](docs/opencti-docker-update-workflow.md): Guide for updating OpenCTI with Docker Compose.

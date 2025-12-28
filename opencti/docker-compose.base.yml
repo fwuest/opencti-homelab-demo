@@ -1,88 +1,6 @@
 services:
-  connector-opencti:
-    image: opencti/connector-opencti:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
-      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_OPENCTI_DATASETS}
-      - CONNECTOR_ID=${CONNECTOR_ID_OPENCTI_DATASETS}
-      - "CONNECTOR_NAME=OpenCTI Datasets"
-      - CONNECTOR_SCOPE=marking-definition,identity,location
-      - CONNECTOR_CONFIDENCE_LEVEL=100
-      - CONNECTOR_UPDATE_EXISTING_DATA=true
-      - CONNECTOR_RUN_AND_TERMINATE=false
-      - CONNECTOR_LOG_LEVEL=error
-      - CONFIG_SECTORS_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/sectors.json
-      - CONFIG_GEOGRAPHY_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/geography.json
-      - CONFIG_COMPANIES_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/companies.json
-      - CONFIG_REMOVE_CREATOR=false
-      - CONFIG_INTERVAL=7 # In days
-    networks:
-      - opencti-network
-    restart: always
-    depends_on:
-      opencti-backend:
-        condition: service_healthy
-
-  connector-mitre:
-    image: opencti/connector-mitre:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
-      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_MITRE_DATASETS}
-      - CONNECTOR_ID=${CONNECTOR_ID_MITRE_DATASETS}
-      - "CONNECTOR_NAME=MITRE Datasets"
-      - CONNECTOR_SCOPE=tool,report,malware,identity,campaign,intrusion-set,attack-pattern,course-of-action,x-mitre-data-source,x-mitre-data-component,x-mitre-matrix,x-mitre-tactic,x-mitre-collection
-      - CONNECTOR_RUN_AND_TERMINATE=false
-      - CONNECTOR_LOG_LEVEL=error
-      - MITRE_REMOVE_STATEMENT_MARKING=true
-      - MITRE_INTERVAL=7 # In days
-    networks:
-      - opencti-network
-    restart: always
-    depends_on:
-      opencti-backend:
-        condition: service_healthy
-
-  connector-mitre-atlas:
-    image: opencti/connector-mitre-atlas:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
-      - OPENCTI_TOKEN=${CONNECTOR_ID_MITRE_ATLAS}
-      - CONNECTOR_ID=${CONNECTOR_TOKEN_MITRE_ATLAS}
-      - "CONNECTOR_NAME=MITRE ATLAS"
-      - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,relationship,x-mitre-collection,x-mitre-matrix,x-mitre-tactic
-      - CONNECTOR_CONFIDENCE_LEVEL=75 # From 0 (Unknown) to 100 (Fully trusted)
-      - CONNECTOR_RUN_AND_TERMINATE=false
-      - CONNECTOR_LOG_LEVEL=error
-      - MITRE_ATLAS_URL=https://raw.githubusercontent.com/mitre-atlas/atlas-navigator-data/main/dist/stix-atlas.json
-      - MITRE_ATLAS_INTERVAL=7 # In days, must be strictly greater than 1
-    networks:
-      - opencti-network
-    restart: always
-    depends_on:
-      opencti-backend:
-        condition: service_healthy
-
-  connector-disarm-framework:
-    image: opencti/connector-disarm-framework:${OPENCTI_VERSION}
-    environment:
-      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
-      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_DISARM_FRAMEWORK}
-      - CONNECTOR_ID=${CONNECTOR_ID_DISARM_FRAMEWORK}
-      - "CONNECTOR_NAME=DISARM Framework"
-      - CONNECTOR_SCOPE=marking-definition,identity,attack-pattern,course-of-action,intrusion-set,campaign,malware,tool,report,narrative,event,channel
-      - CONNECTOR_RUN_AND_TERMINATE=false
-      - CONNECTOR_LOG_LEVEL=error
-      - DISARM_FRAMEWORK_URL=https://raw.githubusercontent.com/DISARMFoundation/DISARMframeworks/main/generated_files/DISARM_STIX/DISARM.json
-      - DISARM_FRAMEWORK_INTERVAL=7 # In days, must be strictly greater than 1
-    networks:
-      - opencti-network
-    restart: always
-    depends_on:
-      opencti-backend:
-        condition: service_healthy
-
   connector-cve:
-    image: opencti/connector-cve:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-cve:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${CONNECTOR_TOKEN_CISA_CVE}
@@ -97,16 +15,15 @@ services:
       - CVE_MAX_DATE_RANGE=120 # In days, max 120
       - CVE_MAINTAIN_DATA=true # Required, retrieve only updated data
       - CVE_PULL_HISTORY=false # If true, CVE_HISTORY_START_YEAR is required
-      - CVE_HISTORY_START_YEAR=2019 # Required if pull_history is True, min 2019 (see documentation CVE and CVSS base score V3.1)
+      - CVE_HISTORY_START_YEAR=2022 # Required if pull_history is True, min 2019 (see documentation CVE and CVSS base score V3.1)
     networks:
       - opencti-network
     restart: always
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-cpe:
-    image: opencti/connector-cpe:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-cpe:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${CONNECTOR_TOKEN_CISA_CPE}
@@ -125,7 +42,7 @@ services:
       opencti-backend:
         condition: service_healthy
   connector-cisa-known-exploited-vulnerabilities:
-    image: opencti/connector-cisa-known-exploited-vulnerabilities:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-cisa-known-exploited-vulnerabilities:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${CONNECTOR_TOKEN_CISA_KEV}
@@ -144,8 +61,6 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
-
 networks:
   opencti-network:
     driver: bridge

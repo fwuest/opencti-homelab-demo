@@ -1,5 +1,25 @@
 services:
-  redis:
+
+  ###########################
+  # DEPENDENCIES            #
+  ###########################
+
+  # Generate RSA key for xtm-composer (PKCS#8 format)
+
+    rsa-key-generator:
+    image: alpine/openssl:${ALPINE_OS_VERSION}
+    volumes:
+      - rsakeys:/keys
+    entrypoint: ["/bin/ash"]
+    command: ["-c", "if [ ! -f /keys/private_key.pem ]; then openssl genpkey -algorithm RSA -out /keys/private_key.pem -pkeyopt rsa_keygen_bits:4096; fi && tail -f /dev/null"]
+    healthcheck:
+      test: ["CMD", "test", "-f", "/keys/private_key.pem"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: always
+    
+    redis:
     image: redis:${OPENCTI_REDIS_VERSION}
     restart: always
     mem_limit: 8192m
@@ -12,24 +32,23 @@ services:
     volumes:
       - redisdata:/data
     networks:
-      - opencti-network   
+      - opencti-network
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 3
-  elasticsearch:
+    elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_STACK_VERSION}
-    mem_limit: 8448m
     volumes:
       - esdata:/usr/share/elasticsearch/data
       - esbackup:/usr/share/elasticsearch/backup
     environment:
       # Comment-out the line below for a cluster of multiple nodes
       - discovery.type=single-node
+      - network.host=0.0.0.0
       # Uncomment the line below below for a cluster of multiple nodes
       # - cluster.name=docker-cluster
-      - network.host=0.0.0.0
       - xpack.ml.enabled=false
       - xpack.security.enabled=false
       - thread_pool.search.queue_size=5000
@@ -37,22 +56,13 @@ services:
       - "ES_JAVA_OPTS=-Xms${ELASTIC_MEMORY_SIZE} -Xmx${ELASTIC_MEMORY_SIZE}"
     networks:
       - opencti-network
-    ports:
-      - "9200:9200"
     restart: always
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
     healthcheck:
       test: curl -s http://elasticsearch:9200 >/dev/null || exit 1
       interval: 30s
       timeout: 10s
       retries: 50
-  kibana:
+    kibana:
     image: docker.elastic.co/kibana/kibana:${ELASTIC_STACK_VERSION}
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
@@ -63,7 +73,7 @@ services:
       - "5601:5601"
     depends_on:
       - elasticsearch
-  minio:
+    minio:
     image: minio/minio:${MINIO_VERSION}
     volumes:
       - s3data:/data
@@ -73,7 +83,7 @@ services:
       - "9000:9000"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}    
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     command: server /data
     restart: always
     healthcheck:
@@ -81,14 +91,18 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-  rabbitmq:
+    rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION}
     environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
       - RABBITMQ_NODENAME=rabbit01@localhost
-      - RABBITMQ_COSUMER_TIMEOUT=36000000
+      - RABBITMQ_COSUMER_TIMEOUT=86400000
+      - RABBITMQ_MAX_MESSAGE_SIZE=536870912
     volumes:
+      - type: bind
+        source: ./rabbitmq.conf
+        target: /etc/rabbitmq/rabbitmq.conf
       - amqpdata:/var/lib/rabbitmq
     restart: always
     networks:
@@ -98,9 +112,45 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
-## START FRONTEND CONFIG
-  opencti-frontend:
-    image: opencti/platform:${OPENCTI_VERSION} 
+
+###########################
+# COMMON                  #
+###########################
+
+xtm-composer:
+    image: filigran/xtm-composer:${FILIGRAN_XTM_COMPOSER_VERSION}
+    platform: linux/amd64
+    environment:
+      - MANAGER__ID=${XTM_COMPOSER_ID}
+      - MANAGER__NAME=OpenCTI Connector Manager
+      - MANAGER__CREDENTIALS_KEY_FILEPATH=/keys/private_key.pem
+      - OPENCTI__ENABLE=true
+      - OPENCTI__URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI__TOKEN=${OPENCTI_ADMIN_TOKEN}
+      - OPENCTI__DAEMON__SELECTOR=docker
+      - OPENCTI__DAEMON__DOCKER__NETWORK_MODE=${COMPOSE_PROJECT_NAME}_default
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - rsakeys:/keys:ro  # RSA key mounted as read-only
+    networks:
+      - opencti-network
+    depends_on:
+      rsa-key-generator:
+        condition: service_healthy
+      opencti-backend:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: always
+
+###########################
+#  OPENCTI                #
+#                         #
+#  START FRONTEND CONFIG  #
+###########################
+
+    opencti-frontend:
+    image: ghcr.io/opencti-platform/opencti/platform:${OPENCTI_VERSION}
     environment:
       - NODE_OPTIONS=--max-old-space-size=8192
       - APP__PORT=8080
@@ -129,16 +179,23 @@ services:
       - GARBAGE_COLLECTION_MANAGER__ENABLED=false
       - AI__ENABLED=true
       - AI__TYPE=mistralai
-      ##- AI__TOKEN=none 
+      #- AI__TOKEN=none
       - AI__TOKEN=${OPENCTI_AI_TOKEN}
       - AI__ENDPOINT=http://10.0.30.66:11434
+      ## - AI__MODEL=dolphin3
+      - AI__MODEL=${OLLAMA_MODEL}
+      ## hf.co/bartowski/mistralai_Mistral-Small-3.1-24B-Instruct-2503-GGUF:IQ2_S
+      ## - AI__MODEL=command-r7b
+      ## - AI__MODEL=deepseek-r1:1.5b
       ## - AI__TOKEN=${OPENAI_TOKEN}
       ## - AI__MODEL=qwen2.5:7b
-      - AI__MODEL=mistral:instruct
+      ## - AI__MODEL=mistral:instruct
+      ## - AI__MODEL=llama3.2:3b-instruct-q8_0
       - REDIS__HOSTNAME=redis
       - REDIS__PORT=6379
       - REDIS__TRIMMING=500000
       - ELASTICSEARCH__URL=http://elasticsearch:9200
+      - ELASTICSEARCH__NUMBER_OF_REPLICAS=0
       - MINIO__ENDPOINT=minio
       - MINIO__PORT=9000
       - MINIO__USE_SSL=false
@@ -150,7 +207,7 @@ services:
       - RABBITMQ__MANAGEMENT_SSL=false
       - RABBITMQ__USERNAME=${RABBITMQ_DEFAULT_USER}
       - RABBITMQ__PASSWORD=${RABBITMQ_DEFAULT_PASS}
-      - RABBITMQ__QUEUE_TYPE="quorum"      
+      - RABBITMQ__QUEUE_TYPE="quorum"
       - SMTP__HOSTNAME=${SMTP_HOSTNAME}
       - SMTP__PORT=25
       - PROVIDERS__LOCAL__STRATEGY=LocalStrategy
@@ -178,11 +235,19 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
-## END FRONTEND CONFIG
+
+# END FRONTEND CONFIG
+
+###########################
+#  OPENCTI                #
+#                         #
+#  START BACKEND CONFIG   #
+###########################
 
 ## START BACKEND CONFIG
-  opencti-backend:
-    image: opencti/platform:${OPENCTI_VERSION} 
+
+pencti-backend:
+    image: ghcr.io/opencti-platform/opencti/platform:${OPENCTI_VERSION}
     environment:
       - NODE_OPTIONS=--max-old-space-size=8192
       - APP__PORT=8082
@@ -197,6 +262,7 @@ services:
       - REDIS__PORT=6379
       - REDIS__TRIMMING=500000
       - ELASTICSEARCH__URL=http://elasticsearch:9200
+      - ELASTICSEARCH__NUMBER_OF_REPLICAS=0
       - MINIO__ENDPOINT=minio
       - MINIO__PORT=9000
       - MINIO__USE_SSL=false
@@ -208,7 +274,7 @@ services:
       - RABBITMQ__MANAGEMENT_SSL=false
       - RABBITMQ__USERNAME=${RABBITMQ_DEFAULT_USER}
       - RABBITMQ__PASSWORD=${RABBITMQ_DEFAULT_PASS}
-      - RABBITMQ__QUEUE_TYPE="quorum"      
+      - RABBITMQ__QUEUE_TYPE="quorum"
       - SMTP__HOSTNAME=${SMTP_HOSTNAME}
       - SMTP__PORT=25
       - PROVIDERS__LOCAL__STRATEGY=LocalStrategy
@@ -235,8 +301,9 @@ services:
 ## END BACKEND CONFIG
 
 ## START WORKER AND CONNECTOR CONFIGURATION
-  worker:
-    image: opencti/worker:${OPENCTI_VERSION} 
+
+worker:
+    image: ghcr.io/opencti-platform/opencti/worker:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
@@ -250,8 +317,13 @@ services:
       mode: replicated
       replicas: 4
     restart: always
-  connector-export-file-stix:
-    image: opencti/connector-export-file-stix:${OPENCTI_VERSION} 
+
+###########################
+# OPENCTI CONNECTORS      #
+###########################
+
+connector-export-file-stix:
+    image: ghcr.io/opencti-platform/opencti/connector-export-file-stix:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
@@ -267,8 +339,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-  connector-export-file-csv:
-    image: opencti/connector-export-file-csv:${OPENCTI_VERSION} 
+connector-export-file-csv:
+    image: ghcr.io/opencti-platform/opencti/connector-export-file-csv:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
@@ -284,8 +356,8 @@ services:
       opencti-backend:
         condition: service_healthy
     restart: always
-  connector-export-file-txt:
-    image: opencti/connector-export-file-txt:${OPENCTI_VERSION} 
+connector-export-file-txt:
+    image: ghcr.io/opencti-platform/opencti/connector-export-file-txt:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
@@ -301,8 +373,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-  connector-import-file-stix:
-    image: opencti/connector-import-file-stix:${OPENCTI_VERSION} 
+connector-import-file-stix:
+    image: ghcr.io/opencti-platform/opencti/connector-import-file-stix:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
@@ -320,8 +392,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-  connector-import-document:
-    image: opencti/connector-import-document:${OPENCTI_VERSION} 
+connector-import-document:
+    image: ghcr.io/opencti-platform/opencti/connector-import-document:${OPENCTI_VERSION}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
@@ -337,12 +409,114 @@ services:
       - IMPORT_DOCUMENT_CREATE_INDICATOR=true
     restart: always
     networks:
-      - opencti-network 
+      - opencti-network
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+connector-analysis:
+    image: ghcr.io/opencti-platform/opencti/connector-import-document:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+      - CONNECTOR_ID=${CONNECTOR_ANALYSIS_ID} # Valid UUIDv4
+      - CONNECTOR_TYPE=INTERNAL_ANALYSIS
+      - CONNECTOR_NAME=ImportDocumentAnalysis
+      - CONNECTOR_VALIDATE_BEFORE_IMPORT=false # Validate any bundle before import
+      - CONNECTOR_SCOPE=application/pdf,text/plain,text/html
+      - CONNECTOR_AUTO=true # Enable/disable auto-import of file
+      - CONNECTOR_ONLY_CONTEXTUAL=false # Only extract data related to an entity (a report, a threat actor, etc.)
+      - CONNECTOR_LOG_LEVEL=info
+    restart: always
+    networks:
+      - opencti-network
     depends_on:
       opencti-backend:
         condition: service_healthy
 
-# # VOLUMES
+###########################
+# OPENCTI DEFAULT DATA    #
+###########################
+
+connector-opencti:
+    image: opencti/connector-opencti:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_OPENCTI_DATASETS}
+      - CONNECTOR_ID=${CONNECTOR_ID_OPENCTI_DATASETS}
+      - "CONNECTOR_NAME=OpenCTI Datasets"
+      - CONNECTOR_SCOPE=marking-definition,identity,location
+      - CONNECTOR_CONFIDENCE_LEVEL=100
+      - CONNECTOR_UPDATE_EXISTING_DATA=true
+      - CONNECTOR_RUN_AND_TERMINATE=false
+      - CONNECTOR_LOG_LEVEL=error
+      - CONFIG_SECTORS_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/sectors.json
+      - CONFIG_GEOGRAPHY_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/geography.json
+      - CONFIG_COMPANIES_FILE_URL=https://raw.githubusercontent.com/OpenCTI-Platform/datasets/master/data/companies.json
+      - CONFIG_REMOVE_CREATOR=false
+      - CONFIG_INTERVAL=7 # In days
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+connector-mitre:
+    image: opencti/connector-mitre:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_MITRE_DATASETS}
+      - CONNECTOR_ID=${CONNECTOR_ID_MITRE_DATASETS}
+      - "CONNECTOR_NAME=MITRE Datasets"
+      - CONNECTOR_SCOPE=tool,report,malware,identity,campaign,intrusion-set,attack-pattern,course-of-action,x-mitre-data-source,x-mitre-data-component,x-mitre-matrix,x-mitre-tactic,x-mitre-collection
+      - CONNECTOR_RUN_AND_TERMINATE=false
+      - CONNECTOR_LOG_LEVEL=error
+      - MITRE_REMOVE_STATEMENT_MARKING=true
+      - MITRE_INTERVAL=7 # In days
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+connector-mitre-atlas:
+    image: opencti/connector-mitre-atlas:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_ID_MITRE_ATLAS}
+      - CONNECTOR_ID=${CONNECTOR_TOKEN_MITRE_ATLAS}
+      - "CONNECTOR_NAME=MITRE ATLAS"
+      - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,relationship,x-mitre-collection,x-mitre-matrix,x-mitre-tactic
+      - CONNECTOR_CONFIDENCE_LEVEL=75 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_RUN_AND_TERMINATE=false
+      - CONNECTOR_LOG_LEVEL=error
+      - MITRE_ATLAS_URL=https://raw.githubusercontent.com/mitre-atlas/atlas-navigator-data/main/dist/stix-atlas.json
+      - MITRE_ATLAS_INTERVAL=7 # In days, must be strictly greater than 1
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+connector-disarm-framework:
+    image: opencti/connector-disarm-framework:${OPENCTI_VERSION}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_DISARM_FRAMEWORK}
+      - CONNECTOR_ID=${CONNECTOR_ID_DISARM_FRAMEWORK}
+      - "CONNECTOR_NAME=DISARM Framework"
+      - CONNECTOR_SCOPE=marking-definition,identity,attack-pattern,course-of-action,intrusion-set,campaign,malware,tool,report,narrative,event,channel
+      - CONNECTOR_RUN_AND_TERMINATE=false
+      - CONNECTOR_LOG_LEVEL=error
+      - DISARM_FRAMEWORK_URL=https://raw.githubusercontent.com/DISARMFoundation/DISARMframeworks/main/generated_files/DISARM_STIX/DISARM.json
+      - DISARM_FRAMEWORK_INTERVAL=7 # In days, must be strictly greater than 1
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+## VOLUMES
 
 volumes:
   esdata:
@@ -351,6 +525,9 @@ volumes:
   s3data:
   redisdata:
   amqpdata:
+  rsakeys:
+
+## NETWORK
 
 networks:
   opencti-network:

@@ -1,6 +1,6 @@
 services:
   connector-dnstwist:
-    image: opencti/connector-dnstwist:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-dnstwist:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - CONNECTOR_NAME=DNS_TWISTER
       - CONNECTOR_SCOPE=Domain-Name
@@ -21,9 +21,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-google-dns:
-    image: opencti/connector-google-dns:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-google-dns:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${GOOGLE_TOKEN_CONNECTOR}
@@ -40,9 +39,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-google-safebrowsing:
-    image: opencti/connector-google-safebrowsing:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-google-safebrowsing:${OPENCTI_VERSION_CONNECTORS}
     environment:
       # Connector's definition parameters:
       - CONNECTOR_NAME=Google Safe Browsing
@@ -52,8 +50,8 @@ services:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${SAFEBROWSING_TOKEN_CONNECTOR} # Your Connector's token
       - CONNECTOR_ID=${GOOGLE_SAFEBROWSING_ID_CONNECTOR} # Your connector UUID
-      - CONNECTOR_LOG_LEVEL=info 
-      - CONNECTOR_AUTO=false
+      - CONNECTOR_LOG_LEVEL=info
+      - CONNECTOR_AUTO=true
       - CONNECTOR_UPDATE_EXISTING_DATA=true
       # Connector's custom execution parameters:
       - GOOGLE_SAFE_BROWSING_API_KEY=${SAFEBROWSING_API_TOKEN} # Your Google Safe Browsing API key
@@ -63,9 +61,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-greynoise:
-    image: opencti/connector-greynoise:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-greynoise:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${GREYNOISE_CONNECTOR_TOKEN}
@@ -88,9 +85,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-hygiene:
-    image: opencti/connector-hygiene:${OPENCTI_VERSION} 
+    image: ghcr.io/opencti-platform/opencti/connector-hygiene:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${HYGIENE_TOKEN_CONNECTOR}
@@ -109,9 +105,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-hostio:
-    image: opencti/connector-hostio:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-hostio:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${HOSTIO_TOKEN_CONNECTOR}
@@ -133,9 +128,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-ipinfo:
-    image: opencti/connector-ipinfo:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-ipinfo:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${IPINFO_TOKEN_CONNECTOR}
@@ -143,7 +137,7 @@ services:
       - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
       - CONNECTOR_NAME=IpInfo
       - CONNECTOR_SCOPE=IPv4-Addr
-      - CONNECTOR_AUTO=false
+      - CONNECTOR_AUTO=true
       - CONNECTOR_CONFIDENCE_LEVEL=70 # From 0 (Unknown) to 100 (Fully trusted)
       - CONNECTOR_LOG_LEVEL=error
       - IPINFO_TOKEN=${IPINFO_HOSTIO_APP_TOKEN}
@@ -154,9 +148,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-joe-sandbox:
-    image: opencti/connector-joe-sandbox:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-joe-sandbox:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${JOE_SANDBOX_TOKEN_CONNECTOR}
@@ -270,9 +263,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-riskiq-passive-total:
-    image: opencti/connector-riskiq-passive-total:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-riskiq-passive-total:${OPENCTI_VERSION_CONNECTORS}
     environment:
       # Connector's generic execution parameters
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
@@ -283,7 +275,6 @@ services:
       - CONNECTOR_SCOPE=domain, ipv4-address, indicator
       - CONNECTOR_LOG_LEVEL=info
       - CONNECTOR_AUTO=true
-
       # Connector's custom execution parameters
       - RISKIQ_USERNAME=${RISKIQ_USERNAME}
       - RISKIQ_API_KEY=${RISKIQ_API_KEY}
@@ -299,9 +290,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-shodan-internetdb:
-    image: opencti/connector-shodan-internetdb:${OPENCTI_VERSION}  
+    image: ghcr.io/opencti-platform/opencti/connector-shodan-internetdb:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${SHODAN_INTERNETDB_TOKEN_CONNECTOR}
@@ -310,7 +300,7 @@ services:
       - CONNECTOR_NAME=Shodan InternetDB
       - CONNECTOR_SCOPE=IPv4-Addr
       - CONNECTOR_CONFIDENCE_LEVEL=75
-      - CONNECTOR_AUTO=false
+      - CONNECTOR_AUTO=true
       - CONNECTOR_LOG_LEVEL=error
       - SHODAN_MAX_TLP=white
       - SHODAN_SSL_VERIFY=true
@@ -320,9 +310,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-shodan:
-    image: opencti/connector-shodan:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-shodan:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${SHODAN_TOKEN_CONNECTOR}
@@ -342,9 +331,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-urlscan-enrichment:
-    image: opencti/connector-urlscan-enrichment:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-urlscan-enrichment:${OPENCTI_VERSION_CONNECTORS}
     environment:
       # OpenCTI's generic execution parameters:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
@@ -368,10 +356,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
-
   connector-yara:
-    image: opencti/connector-yara:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-yara:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${YARA_TOKEN_CONNECTOR}
@@ -388,9 +374,8 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-
   connector-virustotal:
-    image: opencti/connector-virustotal:${OPENCTI_VERSION}       
+    image: ghcr.io/opencti-platform/opencti/connector-virustotal:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${VIRUS_TOTAL_TOKEN_CONNECTOR}
@@ -434,7 +419,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
 networks:
   opencti-network:
     driver: bridge

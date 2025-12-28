@@ -1,10 +1,10 @@
 services:
   connector-misp-feed-botvrij:
-    image: opencti/connector-misp-feed:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-misp-feed:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${MISP_BOTVRIJ_TOKEN_CONNECTOR}
-      - CONNECTOR_ID=${MISP_BOTVRIJ_ID} # Valid UUIDv4
+      - CONNECTOR_ID=c58c3fac-0819-495c-b790-e4a75c72bfec
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
       - "CONNECTOR_NAME=MISP Feed (Botvrij)"
       - CONNECTOR_SCOPE=misp-feed-botvrij
@@ -14,7 +14,6 @@ services:
       - CONNECTOR_LOG_LEVEL=error
       - MISP_FEED_URL=https://www.botvrij.eu/data/feed-osint/
       - MISP_FEED_SSL_VERIFY=true # Required
-      - MISP_FEED_IMPORT_FROM_DATE=2020-01-01 # Required, import all event from this date
       - MISP_FEED_CREATE_REPORTS=true # Required, create report for MISP event
       - MISP_FEED_REPORT_TYPE=misp-botvrij-event
       - MISP_FEED_CREATE_INDICATORS=true # Required, create indicators from attributes
@@ -28,19 +27,20 @@ services:
       - MISP_FEED_IMPORT_UNSUPPORTED_OBSERVABLES_AS_TEXT_TRANSPARENT=false #  Optional, import unsupported observable as x_opencti_text just with the value
       - MISP_FEED_IMPORT_WITH_ATTACHMENTS=true # Optional, try to import a PDF file from the attachment attribute
       - MISP_FEED_INTERVAL=240 # Required, in minutes
+      - MISP_FEED_SOURCE_TYPE=url # Optionnal, url or s3
     restart: always
     networks:
-      - opencti-network 
+      - opencti-network
     depends_on:
       opencti-backend:
         condition: service_healthy
 
   connector-misp-feed:
-    image: opencti/connector-misp-feed:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-misp-feed:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${MISP_CIRCL_TOKEN_CONNECTOR}
-      - CONNECTOR_ID=${MISP_CIRCL_ID} # Valid UUIDv4
+      - CONNECTOR_ID=55b4fbbf-a422-4e01-b2fc-e525d90e607c
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
       - "CONNECTOR_NAME=MISP Feed (CIRCL)"
       - CONNECTOR_SCOPE=misp-feed-circl
@@ -50,7 +50,6 @@ services:
       - CONNECTOR_LOG_LEVEL=error
       - MISP_FEED_URL=https://www.circl.lu/doc/misp/feed-osint/
       - MISP_FEED_SSL_VERIFY=true # Required
-      - MISP_FEED_IMPORT_FROM_DATE=2020-01-01 # Required, import all event from this date
       - MISP_FEED_CREATE_REPORTS=true # Required, create report for MISP event
       - MISP_FEED_REPORT_TYPE=misp-circl-event
       - MISP_FEED_CREATE_INDICATORS=true # Required, create indicators from attributes
@@ -64,15 +63,16 @@ services:
       - MISP_FEED_IMPORT_UNSUPPORTED_OBSERVABLES_AS_TEXT_TRANSPARENT=false #  Optional, import unsupported observable as x_opencti_text just with the value
       - MISP_FEED_IMPORT_WITH_ATTACHMENTS=true # Optional, try to import a PDF file from the attachment attribute
       - MISP_FEED_INTERVAL=90 # Required, in minutes
+      - MISP_FEED_SOURCE_TYPE=url # Optionnal, url or s3
     restart: always
     networks:
-      - opencti-network 
+      - opencti-network
     depends_on:
       opencti-backend:
         condition: service_healthy
 
   connector-misp-feed-cert-fr:
-    image: opencti/connector-misp-feed:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-misp-feed:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${MISP_FEED_CERT_FR_ID_TOKEN_CONNECTOR}
@@ -86,7 +86,6 @@ services:
       - CONNECTOR_LOG_LEVEL=info
       - MISP_FEED_URL=https://misp.cert.ssi.gouv.fr/feed-misp/
       - MISP_FEED_SSL_VERIFY=true # Required
-      - MISP_FEED_IMPORT_FROM_DATE=2018-01-01 # Required, import all event from this date
       - MISP_FEED_CREATE_REPORTS=true # Required, create report for MISP event
       - MISP_FEED_REPORT_TYPE=misp-event
       - MISP_FEED_CREATE_INDICATORS=true # Required, create indicators from attributes
@@ -96,9 +95,10 @@ services:
       - MISP_FEED_IMPORT_UNSUPPORTED_OBSERVABLES_AS_TEXT=false #  Optional, import unsupported observable as x_opencti_text
       - MISP_FEED_IMPORT_WITH_ATTACHMENTS=yes # Optional, try to import a PDF file from the attachment attribute
       - MISP_FEED_INTERVAL=120 # Required, in minutes
+      - MISP_FEED_SOURCE_TYPE=url # Optionnal, url or s3
     restart: always
     networks:
-      - opencti-network 
+      - opencti-network
     depends_on:
       opencti-backend:
         condition: service_healthy
@@ -106,4 +106,3 @@ services:
 networks:
   opencti-network:
     driver: bridge
-

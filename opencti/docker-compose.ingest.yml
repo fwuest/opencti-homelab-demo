@@ -1,6 +1,39 @@
 services:
+  connector-bambenek:
+    image: ghcr.io/opencti-platform/opencti/connector-bambenek:${OPENCTI_VERSION_CONNECTORS}
+    environment:
+      # Connector's generic execution parameters
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${BABENEK_TOKEN_CONNECTOR}
+      # Connector's definition parameters REQUIRED
+      - CONNECTOR_ID=${BABENEK_ID_CONNECTOR}
+      - CONNECTOR_NAME=Bambenek
+      - CONNECTOR_SCOPE=ipv4-addr,ipv6-addr,domain,indicator
+      - CONNECTOR_LOG_LEVEL=info
+      - CONNECTOR_DURATION_PERIOD=PT4H # ISO8601 format in String, start with 'P...' for Period
+
+      # Connector's definition parameters OPTIONAL
+      - CONNECTOR_QUEUE_THRESHOLD=100 # Default 500Mo, Float accepted
+      # - CONNECTOR_RUN_AND_TERMINATE=False # Default False, True run connector once
+      - CONNECTOR_SEND_TO_QUEUE=True # Default True
+      # - CONNECTOR_SEND_TO_DIRECTORY=False # Default False
+      # - CONNECTOR_SEND_TO_DIRECTORY_PATH=CHANGEME # if CONNECTOR_SEND_TO_DIRECTORY is True, you must specify a path
+      # - CONNECTOR_SEND_TO_DIRECTORY_RETENTION=7 # Default 7, in days
+
+      # Connector's custom execution parameters
+      - BAMBENEK_USERNAME=${BABENEK_USERNAME_CONNECTOR}
+      - BAMBENEK_PASSWORD=${BABENEK_PASSWORD_CONNECTOR}
+      - BAMBENEK_COLLECTIONS=c2_domain_highconf,c2_ip_highconf
+      # - BAMBENEK_COLLECTIONS=c2_dga,c2_dga_high_conf,c2_domain,c2_domain_highconf,c2_ip,c2_ip_highconf
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
   connector-urlscan:
-    image: opencti/connector-urlscan:${OPENCTI_VERSION} 
+    image: ghcr.io/opencti-platform/opencti/connector-urlscan:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${URLSCANIO_TOKEN_CONNECTOR}
@@ -23,8 +56,30 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
+
+  connector-abuseipdb-ipblacklist:
+    image: ghcr.io/opencti-platform/opencti/connector-abuseipdb-ipblacklist:${OPENCTI_VERSION_CONNECTORS}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_ABUSEIPDB_BLKLST}
+      - CONNECTOR_ID=${CONNECTOR_ID_ABUSEIPDB_BLKLST} # Valid UUIDv4
+      - "CONNECTOR_NAME=AbuseIPDB IP Blacklist"
+      - CONNECTOR_SCOPE=abuseipdb
+      - CONNECTOR_LOG_LEVEL=error
+      - ABUSEIPDB_URL=https://api.abuseipdb.com/api/v2/blacklist
+      - ABUSEIPDB_API_KEY=${CONNECTOR_APIKEY_ABUSEIPDB_BLKLST}
+      - ABUSEIPDB_SCORE=100
+      - ABUSEIPDB_LIMIT=1000
+      - ABUSEIPDB_INTERVAL=2 #Day
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
   connector-urlhaus:
-    image: opencti/connector-urlhaus:${OPENCTI_VERSION} 
+    image: ghcr.io/opencti-platform/opencti/connector-urlhaus:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${URLHAUS_TOKEN_CONNECTOR}
@@ -45,8 +100,9 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
+
   connector-abuse-ssl:
-    image: opencti/connector-abuse-ssl:${OPENCTI_VERSION}
+    image: ghcr.io/opencti-platform/opencti/connector-abuse-ssl:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${ABUSE_SSL_TOKEN_CONNECTOR}
@@ -65,32 +121,126 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
-  connector-malwarebazaar-recent-additions:
-    image: opencti/connector-malwarebazaar-recent-additions:${OPENCTI_VERSION}  
+
+  connector-malwarebazaar:
+    image: opencti/connector-malwarebazaar:${OPENCTI_VERSION_CONNECTORS}
+    ##  image: ghcr.io/opencti-platform/opencti/connector-malwarebazaar:${OPENCTI_VERSION_CONNECTORS}
     environment:
+      # Connector's generic execution parameters
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
-      - OPENCTI_TOKEN=${MALWAREBAZAAR_RECENT_ADDITIONS_ID_CONNECTOR}
-      - CONNECTOR_ID=${MALWAREBAZAAR_RECENT_ADDITIONS_TOKEN_CONNECTOR}
+      - OPENCTI_TOKEN=${MALWAREBAZAAR_TOKEN_CONNECTOR}
+      # Connector's definition parameters REQUIRED
+      - CONNECTOR_ID=${MALWAREBAZAAR_ID_CONNECTOR} # Make sure to define this in ENV or config.yml
       - CONNECTOR_TYPE=EXTERNAL_IMPORT
-      - "CONNECTOR_NAME=MalwareBazaar Recent Additions"
-      - CONNECTOR_CONFIDENCE_LEVEL=50 # From 0 (Unknown) to 100 (Fully trusted)
-      - CONNECTOR_CREATE_INDICATOR=true
-      - CONNECTOR_UPDATE_EXISTING_DATA=false
-      - CONNECTOR_LOG_LEVEL=error
-      - MALWAREBAZAAR_RECENT_ADDITIONS_API_URL=https://mb-api.abuse.ch/api/v1/
-      - MALWAREBAZAAR_RECENT_ADDITIONS_COOLDOWN_SECONDS=360 # Time to wait in seconds between subsequent requests
-      - MALWAREBAZAAR_RECENT_ADDITIONS_INCLUDE_TAGS=exe,dll,docm,docx,doc,xls,xlsx,xlsm,js # (Optional) Only download files if any tag matches. (Comma separated)
-      - MALWAREBAZAAR_RECENT_ADDITIONS_INCLUDE_REPORTERS= # (Optional) Only download files uploaded by these reporters. (Comma separated)
-      - MALWAREBAZAAR_RECENT_ADDITIONS_LABELS=malware-bazar # (Optional) Labels to apply to uploaded Artifacts. (Comma separated)
-      - MALWAREBAZAAR_RECENT_ADDITIONS_LABELS_COLOR=#54483b # Color to use for labels
+      - CONNECTOR_NAME=MalwareBazaar
+      - CONNECTOR_SCOPE=StixFile
+      - CONNECTOR_LOG_LEVEL=info
+      - CONNECTOR_DURATION_PERIOD=PT50M # ISO8601 format in String, start with 'P...' for Period
+      # Connector's definition parameters OPTIONAL
+      - CONNECTOR_QUEUE_THRESHOLD=500 # Default 500Mo, Float accepted
+      # - CONNECTOR_RUN_AND_TERMINATE=False # Default False, True run connector once
+      # - CONNECTOR_SEND_TO_QUEUE=True # Default True
+      # - CONNECTOR_SEND_TO_DIRECTORY=False # Default False
+      # - CONNECTOR_SEND_TO_DIRECTORY_PATH=CHANGEME # if CONNECTOR_SEND_TO_DIRECTORY is True, you must specify a path
+      # - CONNECTOR_SEND_TO_DIRECTORY_RETENTION=7 # Default 7, in days
+      # Connector's custom execution parameters
+      - MALWAREBAZAAR_API_BASE_URL=https://mb-api.abuse.ch/api/v1/
+      - MALWAREBAZAAR_API_KEY=${MALWAREBAZAAR_USER_TOKEN} # Stored in ENVAR, but can be hardcoded. Do not check TOKEN into version control. Not required in this implementation, left here for reference if ever needed.
+      - MALWAREBAZAAR_TLP_LEVEL=clear # available values are: clear, white, green, amber, amber+strict, red - Default: 'clear'
+      - MALWAREBAZAAR_X_OPENCTI_SCORE=100 # Range is 0 - 100, will degrade over time see: https://docs.opencti.io/latest/usage/indicators-lifecycle/#score-decay
+      - MALWAREBAZAAR_INCLUDE_TAGS=exe,dll,docm,docx,doc,xls,xlsx,xlsm,js # (Optional) Only download files if any tag matches. (Comma separated)
+      - MALWAREBAZAAR_INCLUDE_REPORTERS= # (Optional) Only download files uploaded by these reporters. (Comma separated)
+      - MALWAREBAZAAR_LABELS=malware-bazaar # (Optional) Labels to apply to uploaded Artifacts. (Comma separated)
+      # Add proxy parameters below if needed
+      # - HTTP_PROXY=CHANGEME
+      # - HTTPS_PROXY=CHANGEME
+      # - NO_PROXY=CHANGEME
     networks:
       - opencti-network
     restart: always
     depends_on:
       opencti-backend:
         condition: service_healthy
+
+  connector-phishunt:
+    image: ghcr.io/opencti-platform/opencti/connector-phishunt:${OPENCTI_VERSION_CONNECTORS}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_PHISHUNT}  ## (UUIDv4 token)
+      - CONNECTOR_ID=${CONNECTOR_ID_PHISHUNT} ## (UUIDv4 token)
+      - CONNECTOR_NAME=Phishunt
+      - CONNECTOR_SCOPE=phishunt
+      - CONNECTOR_CONFIDENCE_LEVEL=40 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - PHISHUNT_API_KEY= # Optional, if not provided, consume only https://phishunt.io/feed.txt
+      - PHISHUNT_CREATE_INDICATORS=true
+      - PHISHUNT_INTERVAL=3 # In days, must be strictly greater than 1
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-ipsum:
+    image: ghcr.io/opencti-platform/opencti/connector-ipsum:${OPENCTI_VERSION_CONNECTORS}
+    environment:
+      # Connector's generic execution parameters
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${IPSUM_TOKEN_CONNECTOR}
+      # Connector's definition parameters REQUIRED
+      - CONNECTOR_ID=${IPSUM_ID_CONNECTOR}
+      - CONNECTOR_NAME=IPsum
+      - CONNECTOR_SCOPE=ipsum
+      - CONNECTOR_LOG_LEVEL=error
+      - CONNECTOR_DURATION_PERIOD=PT24H # ISO8601 format in String, start with 'P...' for Period
+
+      # Connector's definition parameters OPTIONAL
+      # - CONNECTOR_QUEUE_THRESHOLD=500 # Default 500Mo, Float accepted
+      # - CONNECTOR_RUN_AND_TERMINATE=False # Default False, True run connector once
+      # - CONNECTOR_SEND_TO_QUEUE=True # Default True
+      # - CONNECTOR_SEND_TO_DIRECTORY=False # Default False
+      # - CONNECTOR_SEND_TO_DIRECTORY_PATH=CHANGEME # if CONNECTOR_SEND_TO_DIRECTORY is True, you must specify a path
+      # - CONNECTOR_SEND_TO_DIRECTORY_RETENTION=7 # Default 7, in days
+
+      # Connector's custom execution parameters
+      - CONNECTOR_IPSUM_API_BASE_URL=https://raw.githubusercontent.com/stamparm/ipsum/refs/heads/master/levels/5.txt
+      - CONNECTOR_IPSUM_API_KEY=${GITHUB_TOKEN}
+      - CONNECTOR_IPSUM_DEFAULT_X_OPENCTI_SCORE=60
+
+      # Add proxy parameters below if needed
+      # - HTTP_PROXY=CHANGEME
+      # - HTTPS_PROXY=CHANGEME
+      # - NO_PROXY=CHANGEME
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-stopforumspam:
+    image: ghcr.io/opencti-platform/opencti/connector-stopforumspam:${OPENCTI_VERSION_CONNECTORS}
+    environment:
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${CONNECTOR_TOKEN_STOPFORUMSPAM}
+      - CONNECTOR_ID=${CONNECTOR_ID_STOPFORUMSPAM}  ##(UUIDv4 token)
+      - CONNECTOR_NAME=Stopforumspam
+      - CONNECTOR_SCOPE=stopforumspam
+      - CONNECTOR_CONFIDENCE_LEVEL=60 # From 0 (Unknown) to 100 (Fully trusted)
+      - CONNECTOR_LOG_LEVEL=error
+      - STOPFORUMSPAM_URL=https://www.stopforumspam.com/downloads/toxic_domains_whole_filtered_1000.txt
+      - STOPFORUMSPAM_CREATE_INDICATORS=true
+      - STOPFORUMSPAM_INTERVAL=3 # In days, must be strictly greater than 1
+    restart: always
+    networks:
+      - opencti-network
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
   connector-threatfox:
-    image: opencti/connector-threatfox:${OPENCTI_VERSION} 
+    image: ghcr.io/opencti-platform/opencti/connector-threatfox:${OPENCTI_VERSION_CONNECTORS}
     environment:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${THREATFOX_TOKEN_CONNECTOR}
@@ -114,23 +264,55 @@ services:
     depends_on:
       opencti-backend:
         condition: service_healthy
+
   connector-ransomware:
-    image: ransomware-live-custom-5:custom
+    image: ghcr.io/opencti-platform/opencti/connector-ransomwarelive:${OPENCTI_VERSION_CONNECTORS}
     environment:
       # Connector's definition parameters:
       - CONNECTOR_NAME=Ransomware Connector
-      - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,intrusion-set,malware,tool,report
+      # - CONNECTOR_SCOPE=identity,attack-pattern,course-of-action,intrusion-set,malware,tool,report
       # Connector's generic execution parameters:
       - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
       - OPENCTI_TOKEN=${RANSOMWARELIVE_TOKEN_CONNECTOR} #generate user token
-      - CONNECTOR_ID=${RANSOMWARELIVE_ID_CONNECTOR} #Valid UUIDv4 tokem
-      - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted).
-      - CONNECTOR_LOG_LEVEL=debug # Log level: debug, info, warn, error
-      - CONNECTOR_UPDATE_EXISTING_DATA=false
-      - CONNECTOR_PULL_HISTORY=true # If true, the connector will pull the history of the daa. But it is not recommended to set it to true as there will a large influx of data.
-      - CONNECTOR_HISTORY_START_YEAR=2024 # Data only goes back till 2020
-      - CONNECTOR_RUN_EVERY=60m # 10 minutes will be the ideal time
-      # Connector's custom execution parameters:
+      # - CONNECTOR_ID=${RANSOMWARELIVE_ID_CONNECTOR} #Valid UUIDv4 tokem
+      # - CONNECTOR_CONFIDENCE_LEVEL=100 # From 0 (Unknown) to 100 (Fully trusted).
+      # - CONNECTOR_LOG_LEVEL=info # Log level: debug, info, warn, error
+      # - CONNECTOR_UPDATE_EXISTING_DATA=false
+      # - CONNECTOR_PULL_HISTORY=true # If true, the connector will pull the history of the daa. But it is not recommended to set it to true as there will a large influx of data.
+      # - CONNECTOR_HISTORY_START_YEAR=2022 # Data only goes back till 2020
+      # - CONNECTOR_RUN_EVERY=30m # 10 minutes will be the ideal time
+    networks:
+      - opencti-network
+    restart: always
+    depends_on:
+      opencti-backend:
+        condition: service_healthy
+
+  connector-wiz:
+    image: ghcr.io/opencti-platform/opencti/connector-wiz:${OPENCTI_VERSION_CONNECTORS}
+    environment:
+      # Connector's generic execution parameters
+      - OPENCTI_URL=${OPENCTI_BASE_BACKEND_URL}
+      - OPENCTI_TOKEN=${WIZ_CONNECTOR_TOKEN}
+      # Connector's definition parameters REQUIRED
+      - CONNECTOR_ID=${WIZ_CONNECTOR_ID}
+      - "CONNECTOR_NAME=Wiz Cloud Threat Landscape"
+      - CONNECTOR_SCOPE=wiz
+      - CONNECTOR_LOG_LEVEL=error
+      - CONNECTOR_DURATION_PERIOD=PT6H # ISO8601 format in String, start with 'P...' for Period
+      - WIZ_THREAT_ACTOR_AS_INTRUSION_SET=False
+      # Connector's definition parameters OPTIONAL
+      # - CONNECTOR_QUEUE_THRESHOLD=500 # Default 500Mo, Float accepted
+      # - CONNECTOR_RUN_AND_TERMINATE=False # Default False, True run connector once
+      # - CONNECTOR_SEND_TO_QUEUE=True # Default True
+      # - CONNECTOR_SEND_TO_DIRECTORY=False # Default False
+      # - CONNECTOR_SEND_TO_DIRECTORY_PATH=CHANGEME # if CONNECTOR_SEND_TO_DIRECTORY is True, you must specify a path
+      # - CONNECTOR_SEND_TO_DIRECTORY_RETENTION=7 # Default 7, in days
+
+      # Add proxy parameters below if needed
+      # - HTTP_PROXY=CHANGEME
+      # - HTTPS_PROXY=CHANGEME
+      # - NO_PROXY=CHANGEME
     networks:
       - opencti-network
     restart: always
